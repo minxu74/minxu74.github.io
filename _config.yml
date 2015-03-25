@@ -46,3 +46,6 @@ github: {
 safe: true
 lsi: false
 source: your top-level directory
+
+name: Min Xu, ORNL
+markdown: kramdown
