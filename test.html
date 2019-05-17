@@ -1,29 +1,170 @@
----
-layout: recipe
-title: Gingerbread
-recipe-attribution: HungryJenny
-recipe-attribution-link: http://www.opensourcefood.com/people/HungryJenny/recipes/soft-christmas-gingerbread-cookies
----
-Makes about 15 small cookies.
+<!DOCTYPE html>
+<html>
+<head>
+<!--link href="https://unpkg.com/tabulator-tables@4.2.7/dist/css/tabulator_modern.min.css" rel="stylesheet"-->
+<!--link href="https://unpkg.com/tabulator-tables@4.2.7/dist/css/tabulator.min.css" rel="stylesheet"-->
+<link href="https://unpkg.com/tabulator-tables@4.2.7/dist/css/bootstrap/tabulator_bootstrap4.min.css" rel="stylesheet">
+<script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.2.7/dist/js/tabulator.min.js"></script>
 
-## Ingredients
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
 
-* 175g plain flour
-* 90g brown sugar
-* 50g unsalted butter, diced, at room temperature
-* 2 tbsp golden syrup
-* 1 egg, beaten
-* 1 tsp ground ginger
-* 1 tsp cinnamon
-* 1 tsp bicarbonate of soda
-* Icing sugar to dust
+<!--script type="text/javascript" src="data.json"></script-->
 
-## Method
+</head>
 
-1. Sift the flour, ginger, cinnamon and bicarbonate of soda into a large mixing bowl.
-2. Use your fingers to rub in the diced butter. Mix in the sugar.
-3. Mix the egg with the syrup then pour into the flour mixture. Fold in well to form a dough.
-4. Tip some flour onto the work surface and knead the dough until smooth.
-5. Preheat the oven to 180°C.
-6. Roll the dough out flat and use a shaped cutter to make as many cookies as you like.
-7. Transfer the cookies to a tray and bake in the oven for 15 minutes. Lightly dust the cookies with icing sugar.
+<body>
+   <h1> Expert review for cmoring LS3MIP </h1>
+   <div class="table-controls hidden-xs">
+   <!--button id="file-load-trigger"> Open File </button-->
+   <a href="e3sm.html" target="_blank">E3SM variable list</a>
+   </div>
+   <div> 
+   </div>
+   <div id="example-table"></div>
+</body>
+<script>
+   //Build Tabulator
+   var table = new Tabulator("#example-table", {
+
+       ajaxURL:"http://minxu74.github.io/LS3MIP.json",
+
+
+       ajaxConfig:{
+            method:"post",
+            mode:"cors", //set request mode to cors
+            credentials: "same-origin", //send cookies with the request from the matching origin
+            headers: {
+                "Accept": "application/json", //tell the server we need JSON back
+                "X-Requested-With": "XMLHttpRequest", //fix to help some frameworks respond correctly to request
+                "Content-type": 'application/json; charset=utf-8', //set the character encoding of the request
+                "Access-Control-Allow-Origin": "http://yout-site.com", //the URL origin of the site making the request
+       },},
+       height:false,
+       layout:"fitData",
+       //autoColumns:true,
+       //placeholder:"Awaiting Data, Please Load File",
+       footerElement:"<button id='download-json'>Download JSON</button>",
+       //data:data,
+       dataTree:true,
+       //dataTreeStartExpanded:false,
+       dataTreeStartExpanded:function(row, level){
+          return row.getData().confidence; //expand rows where the "driver" data field is true;
+       },
+ 
+       pagination:"local",
+       paginationSize:20,
+       columns:[
+          {title:"id", field:"id", width:150, sort:"number"},
+          {title:"frequency", field:"frequency", width:150},
+          {title:"long name", field:"longname", width:600, editor:"input"},
+          {title:"varname", field:"cmvar", width:150, editor:"input"},
+          {title:"units", field:"units", width:150, editor:"input"},
+          {title:"mip/model", field:"mip", width:150},
+          {title:"relationship", field:"relationship", width:150, editor:"input"},
+          {title:"confidence", field:"confidence", width:150, editor:"input", formatter:function(cell, formatterParams){
+              var cellValue= cell.getValue();
+              if (cellValue >= 90){
+                 //cell.getRow().getTreeParent().getElement().style.backgroundColor = "#90EE90";
+                 cell.getRow().getElement().style.backgroundColor = "#90EE90";
+                 return cellValue;
+              }
+              else{
+                 //cell.getRow().getElement().style.backgroundColor = "#ADD8E6";
+                 //cell.getRow().getTreeParent().getElement().style.backgroundColor = "#ADD8E6";
+                 return cellValue;
+              }
+          }},
+          {formatter:"buttonCross", width:40, align:"center", cellClick:function(e, cell){
+                 cell.getRow().getElement().style.backgroundColor = "#E8E8E8";
+          }},
+       ],
+
+       //rowFormatter:function(row){
+       //   var rowdata = row.getData();
+       //   if(rowdata.id >= 10){
+       //      row.getElement().style.backgroundColor = "#ffbe33";
+       //   }
+       //},
+
+       initialSort:[
+          {column:"id", dir:"asc"}, //sort by this first
+       ],
+       rowClick:function(e, row){
+           //e - the click event object
+           //row - row component
+
+           row.treeToggle(); //collapse the rows children
+           //row.treeExpand();
+
+           row.reformatter();
+
+           var removerows = false;
+           var children=row.getTreeChildren();
+           children.forEach(function(crow, cidx, crows){
+               console.log(crow.getData().confidence);
+               //crow.getElement().style.backgroundColor = "#ADD8E6";
+               if( crow.getData().confidence >= 90){
+                  removerows = true;
+               };
+           });
+
+           console.log(removerows);
+           children.forEach(function(crow, cidx, crows){
+               if( crow.getData().confidence < 90 && removerows ){
+                   console.log('xxx');
+                   console.log(crow.getData().cmvar);
+                   console.dir(crow);
+                   crow.delete();
+               };
+           });
+       },
+   });
+
+   //table.setData("http://minxu74.github.io/LS3MIP.json", {mode="no-cors"}, "post");
+
+
+   //table.setFilter([
+   //    {field:"confidence", type:">", value:8}, //filter by age greater than 52
+   //]);
+
+   $("#expand").click(function(){
+     var rows = table.getRows();
+     
+     table.getRows().treeExpand();
+     //for (myrow in rows){
+     //  myrow.treeToggle();
+     //};
+   });
+   
+   //trigger AJAX load on "Load Data via AJAX" button click
+   //$("#file-load-trigger").click(function(){
+   //    table.setDataFromLocalFile();
+   //});
+
+
+   //custom file formatter
+   var fileFormatter = function(columns, data, options, setFileContents){
+       //columns - column definition array for table (with columns in current visible order);
+       //data - currently displayed table data
+       //options - the options object passed from the download function
+       //setFileContents - function to call to pass the formatted data to the downloader
+   
+       //create a list of all name fields
+       var names = [];
+   
+       data.forEach(function(row){
+           names.push(row.name);
+       });
+   
+       //trigger file download, passing the formatted data and mime type
+       setFileContents(names.join(", "), "text/plain");
+   }
+
+//trigger file download
+
+   $("#download-json").click(function(){
+       table.download(fileFormatter, "test.txt");
+       //table.download("json", "data_saved.json");
+   });
+</script>
+</html>
