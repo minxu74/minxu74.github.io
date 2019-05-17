@@ -27,17 +27,14 @@
    var table = new Tabulator("#example-table", {
 
        ajaxURL:"http://minxu74.github.io/LS3MIP.json",
-
-
        ajaxConfig:{
-            method:"post",
             mode:"cors", //set request mode to cors
             credentials: "same-origin", //send cookies with the request from the matching origin
             headers: {
                 "Accept": "application/json", //tell the server we need JSON back
                 "X-Requested-With": "XMLHttpRequest", //fix to help some frameworks respond correctly to request
                 "Content-type": 'application/json; charset=utf-8', //set the character encoding of the request
-                "Access-Control-Allow-Origin": "http://yout-site.com", //the URL origin of the site making the request
+                "Access-Control-Allow-Origin": "http://minxu74.github.io", //the URL origin of the site making the request
        },},
        height:false,
        layout:"fitData",
