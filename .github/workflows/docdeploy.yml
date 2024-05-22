@@ -1,0 +1,54 @@
+# Min Xu Copyright 2024
+
+# deploy my mkdocs site to the github page
+
+name: build site and deploy it on gh-page
+on:
+   push:
+      branches:
+         - master
+
+
+jobs:
+   build-deploy-mkdocs:
+      name: build-mkdocs
+      runs_on: ubuntu-latest
+      steps:
+
+         - name: checkout repo
+           uses: actions/checkout@v4.1.6
+           with:
+              fetch-depth: 0
+
+         - name: setup_python_env
+           uses: actions/setup-python@v5.10
+           with: python-version: "3.12"
+           cache: pip
+           cache-dependency-path: requirement.txt
+
+         - name: build_cache
+           uses: actions/cache/restore@v4
+           with:
+              key: mx-mkdocs-${{ hashfiles('.cache/**') }}
+              path: cache
+              restore-keys: |
+                 mx-mkdocs-
+
+         - name: install_python_deps
+           run: pip install -r requirement.txt
+
+         - name: build_docs
+           run: |
+              mkdocs build --strict --verbose --clean
+              mkdocs --version
+
+         - name: deploy_gh-page
+           uses: JamesIves/github-pages-deploy-action@v4
+           with:
+              folder: ./site/
+
+         - name: save_cache
+           uses: actions/cache/save@v4
+           with:
+              key: mx-mkdocs-${{ hashfiles('.cache/**') }}
+              path: .cache
