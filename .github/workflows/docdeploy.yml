@@ -24,7 +24,7 @@ jobs:
            with: 
               python-version: '3.12'
               cache: pip
-              cache-dependency-path: requirement.txt
+              cache-dependency-path: requirements.txt
 
          - name: build-cache
            uses: actions/cache/restore@v4
