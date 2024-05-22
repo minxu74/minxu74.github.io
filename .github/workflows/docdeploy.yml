@@ -11,7 +11,7 @@ on:
 
 jobs:
    build-deploy-mkdocs:
-      runs_on: ubuntu-latest
+      runs-on: ubuntu-latest
       steps:
 
          - name: checkout repo
@@ -19,14 +19,14 @@ jobs:
            with:
               fetch-depth: 0
 
-         - name: setup_python_env
+         - name: setup-python-env
            uses: actions/setup-python@v5.10
            with: 
-              python-version: "3.12"
-           cache: pip
-           cache-dependency-path: requirement.txt
+              python-version: '3.12'
+              cache: pip
+              cache-dependency-path: requirement.txt
 
-         - name: build_cache
+         - name: build-cache
            uses: actions/cache/restore@v4
            with:
               key: mx-mkdocs-${{ hashfiles('.cache/**') }}
@@ -34,15 +34,15 @@ jobs:
               restore-keys: |
                  mx-mkdocs-
 
-         - name: install_python_deps
+         - name: install-python-deps
            run: pip install -r requirement.txt
 
-         - name: build_docs
+         - name: build-docs
            run: |
               mkdocs build --strict --verbose --clean
               mkdocs --version
 
-         - name: deploy_gh-page
+         - name: deploy-gh-page
            uses: JamesIves/github-pages-deploy-action@v4
            with:
               folder: ./site/
