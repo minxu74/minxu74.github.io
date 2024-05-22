@@ -1,0 +1,4 @@
+mkdocs~=1.5.3
+mkdocs-material~=9.5.24
+pybtex~=0.24.0
+pypandoc~=1.13
