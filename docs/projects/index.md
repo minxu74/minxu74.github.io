@@ -7,7 +7,7 @@ icon: material/arrow-projectile-multiple
 <!-- md:plugin [glightbox] -->
 
 
-## __Current projects__
+## Current projects
 
 [![RUBISCO logo](https://avatars.githubusercontent.com/u/36375040?s=200&v=4){ align=left width=80 }](https://bgc-feedbacks.org){:target="_blank"}
 __RUBISCO__: Reducing Uncertainties in Biogeochemical Interactions through Synthesis and Computation [:material-github:](https://github.com/rubisco-sfa)
@@ -33,7 +33,7 @@ __ESGF2__: Earth System Grid Federation 2
 
 ---
 
-## __Previous projects__
+## Previous projects
 
 
 [![E3SM-logo](https://e3sm.org/wp-content/uploads/2023/05/E3SM_Logo.png){ align=left width=80 }](https://e3sm.org){:target="_blank"}
