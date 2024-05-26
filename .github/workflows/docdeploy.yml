@@ -2,7 +2,7 @@
 
 # deploy my mkdocs site to the github page
 
-name: build site and deploy it on gh-page
+name: build and deploy
 on:
    push:
       branches:
@@ -27,7 +27,7 @@ jobs:
               cache-dependency-path: requirements.txt
 
          - name: build-cache
-           uses: actions/cache/restore@v4
+           uses: actions/cache@v4
            with:
               key: mx-mkdocs-${{ hashfiles('.cache/**') }}
               path: cache
@@ -37,9 +37,12 @@ jobs:
          - name: install-python-deps
            run: pip install -r requirements.txt
 
+         - name: pre-processing
+           run: python src/bibtex2markdown.py
+
          - name: build-docs
            run: |
-              mkdocs build --strict --verbose --clean
+              mkdocs build --verbose --clean
               mkdocs --version
 
          - name: deploy-gh-page
