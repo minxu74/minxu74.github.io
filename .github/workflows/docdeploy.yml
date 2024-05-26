@@ -27,7 +27,7 @@ jobs:
               cache-dependency-path: requirements.txt
 
          - name: build-cache
-           uses: actions/cache@v4
+           uses: actions/cache/restore@v4
            with:
               key: mx-mkdocs-${{ hashfiles('.cache/**') }}
               path: .cache
