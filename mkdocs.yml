@@ -98,7 +98,6 @@ plugins:
        bib_file: "docs/assets/bib/MXPUB.bib"
        csl_file: "docs/assets/csl/american-geophysical-union.csl"
        cite_inline: False
-
   - link-embeds:
       enabled: true
       name_default: "Untitled Link"
@@ -111,6 +110,30 @@ plugins:
       target: "blank"
       accent: "FFFFFF1A"
       verbose: false
+  - blog
+      blog_dir: blog
+      post_dir: "{blog}/posts"
+      post_date_format: full
+      post_url_date_format: yyyy/MM
+      post_url_format: "{date}/{slug}"
+      post_slugify: !!python/object/apply:pymdownx.slugs.slugify
+         kwds:
+           case: lower
+      post_excerpt: optional
+      post_excerpt_separator: <!-- more -->
+      post_readtime: false
+      post_readtime_words_per_minute: 260
+      categories_slugify: !!python/object/apply:pymdownx.slugs.slugify
+         kwds:
+           case: lower
+      categories_allowed:
+         - Science
+         - Computer
+      authors: true
+      authors_file: "{blog}/.authors.yml"
+      pagination: true
+      pagination_per_page: 5
+      
 
 
 # main page tree
