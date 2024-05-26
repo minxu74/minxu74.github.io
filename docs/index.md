@@ -7,7 +7,7 @@ icon: material/account-arrow-right-outline
 
 # :waving_hand: Welcome to my space
 [![Built with Material for MkDocs](https://img.shields.io/badge/Material_for_MkDocs-526CFE?style=flat&logo=MaterialForMkDocs&logoColor=white)](https://squidfunk.github.io/mkdocs-material/)
-![build and deploy badge](https://github.com/minxu74/minxu74.github.io/actions/workflows/pages/pages-build-deployment/badge.svg)
+![build and deploy badge](https://github.com/minxu74/minxu74.github.io/actions/workflows/docdeploy.yml/badge.svg)
 
 ??? info "Disclaimer"
 
