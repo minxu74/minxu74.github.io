@@ -22,12 +22,11 @@ theme:
       - toc.follow
       #- toc.integrate  # not compatible with indexes
       - navigation.footer
-      - navigation.sections
       #- navigation.tabs
       - navigation.top
-      - navigation.path
+      #- navigation.path #inside
       - navigation.instant
-      - navigation.sections
+      #- navigation.sections
       - navigation.expand
       - navigation.prune
       - navigation.indexes
@@ -83,14 +82,35 @@ markdown_extensions:
    - pymdownx.details
    - pymdownx.superfences
    - footnotes
+   - customblocks
 
 # plugins
 plugins:
   - search
+  - git-revision-date-localized:
+       enable_creation_date: true
+       fallback_to_build_date: true
+       type: iso_date
+  - git-committers:
+      repository: minxu74/minxu74.github.io
+      branch: master
   - bibtex:
        bib_file: "docs/assets/bib/MXPUB.bib"
        csl_file: "docs/assets/csl/american-geophysical-union.csl"
        cite_inline: False
+
+  - link-embeds:
+      enabled: true
+      name_default: "Untitled Link"
+      desc_default: "No description found"
+      image_default: "https://github.com/Aetherinox/mkdocs-link-embeds/assets/118329232/c0298d98-0910-4235-a88f-0c3e2f704ba7"
+      image_disabled: false
+      favicon_default: "https://github.com/Aetherinox/mkdocs-link-embeds/assets/118329232/b37da9c6-6f17-4c3f-9c94-c346a6f31bfa"
+      favicon_disabled: false
+      favicon_size: 25
+      target: "blank"
+      accent: "FFFFFF1A"
+      verbose: false
 
 
 # main page tree
@@ -99,7 +119,21 @@ nav:
        - index.md
    - Projects: 
        - projects/index.md
+       - RUBISCO: projects/rubisco.md
+       - ESGF2: projects/esgf2.md
+       - Geoengineering: projects/geoengineering.md
+       - GPU optimization: projects/gpu.md
    - Publications: 
        - publications/index.md
+       - Presentations: publications/present.md
+       - Posters: publications/poster.md
+   - Tools: tools/index.md
    - Blog:
        - blog/index.md
+
+
+
+
+# extra
+extra_css:
+   - assets/stylesheets/link-embeds.css

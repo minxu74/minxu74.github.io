@@ -28,7 +28,8 @@ __ESGF2__: Earth System Grid Federation 2
 
 ![SAI image](https://nap.nationalacademies.org/openbook/25762/xhtml/images/img-48-1.jpg){ align=left width=80 } Quantifying Feedbacks of Climate Intervention Under Climate Change[^1]
 <!-- from the Fig.2.1a in Reflecting Sunlight: Recommendations for Solar Geoengineering Research and Research Governance (2021) -->
-
+<br>
+<br>
 <br>
 
 ---

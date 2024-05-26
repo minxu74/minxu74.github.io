@@ -11,10 +11,10 @@ from operator import itemgetter
 import re
 import pypandoc
 
-bibfile = "../docs/assets/bib/MXPUB.bib"
-cslfile = "../docs/assets/csl/american-geophysical-union.csl"
+bibfile = "./docs/assets/bib/MXPUB.bib"
+cslfile = "./docs/assets/csl/american-geophysical-union.csl"
 
-file_md = '../docs/publications/index.md'
+file_md = './docs/publications/index.md'
 
 
 bibdata = parse_file(bibfile)
