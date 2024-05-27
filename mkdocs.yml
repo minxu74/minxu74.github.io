@@ -71,7 +71,7 @@ extra:
 
 # extensions
 markdown_extensions:
-   - admonition
+   - admonition # callouts/annotations
    - pymdownx.emoji:
         emoji_generator: !!python/name:material.extensions.emoji.to_svg
         emoji_index: !!python/name:material.extensions.emoji.twemoji
@@ -79,10 +79,17 @@ markdown_extensions:
         permalink: true
    - md_in_html
    - attr_list
-   - pymdownx.details
+   - pymdownx.details # add collapsible call-outs
    - pymdownx.superfences
+   - pymdownx.caret # define superscript
+   - pymdownx.mark # highlight text
+   - pymdownx.tilde # define subscript
+   - pymdownx.critic # track changes
    - footnotes
-   - customblocks
+   - customblocks  # create a block
+   - pymdownx.highlight: # highlight of code blocks
+        linenums_style: pymdownx-inline
+   - pymdownx.inlinehilite # highlight inline code blocks
 
 # plugins
 plugins:
@@ -91,9 +98,17 @@ plugins:
        enable_creation_date: true
        fallback_to_build_date: true
        type: iso_date
+       timezone: America/New_York
+       locale: en 
+       exclude:
+           - index.md
+           - blog/*
+           - jupyternb/*.ipynb
+       enabled: true
+       strict: false
   - git-committers:
-      repository: minxu74/minxu74.github.io
-      branch: master
+       repository: minxu74/minxu74.github.io
+       branch: master
   - bibtex:
        bib_file: "docs/assets/bib/MXPUB.bib"
        csl_file: "docs/assets/csl/american-geophysical-union.csl"
@@ -127,12 +142,19 @@ plugins:
          kwds:
            case: lower
       categories_allowed:
+         - General
          - Science
          - Computer
       authors: true
       authors_file: "{blog}/.authors.yml"
       pagination: true
       pagination_per_page: 5
+  - mkdocs-jupyter
+  #- include-markdown  # tried and it is so slow
+  #- mknotebooks
+  - redirects:
+      redirect_maps:
+         'projects/gpu.md': 'https://gpu.org'
       
 
 
@@ -150,7 +172,11 @@ nav:
        - publications/index.md
        - Presentations: publications/present.md
        - Posters: publications/poster.md
-   - Tools: tools/index.md
+   - Tools: 
+       - tools/index.md
+   - Jupyter Notebook Showcase: 
+       - jupyternb/index.md
+       - Plot NBP time series: jupyternb/check_nbp.ipynb
    - Blog:
        - blog/index.md
 

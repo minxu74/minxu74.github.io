@@ -1,9 +1,11 @@
 mkdocs~=1.6
 mkdocs-material~=9.5.24
 mkdocs-bibtex~=2.15.0
+mkdocs-jupyter
 mkdocs-link-embeds-plugin
 mkdocs-git-revision-date-localized-plugin
 mkdocs-git-committers-plugin-2
+mkdocs-redirects
 markdown-customblocks
 pybtex~=0.24.0
 pypandoc_binary~=1.13
