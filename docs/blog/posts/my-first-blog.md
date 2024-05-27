@@ -8,6 +8,8 @@ categories:
 
 tags:
    - firstblog
+
+comments: true
 ---
 
 This is my first blog. :smile: :material-flower-outline:

@@ -17,6 +17,7 @@ copyright: Copyright &copy; 2024 Min Xu
 # mkdocs conf
 theme:
    name: material
+   custom_dir: overrides
    features:
       - announce.dismiss
       - toc.follow
