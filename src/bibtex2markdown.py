@@ -40,7 +40,9 @@ reorder_dict = OrderedDict(sorted(orig_dict.items(), key = itemgetter(1), revers
 
 
 doi_icon_str = "[:simple-doi:]({0})"
-bib_icon_str = " (1) \n{ .annotate } \n\n 1. "
+bib_icon_str = "&nbsp;&nbsp;(1) {0} \n{{ .annotate }} \n\n 1. "
+
+print (bib_icon_str.format("(2)"))
 #doi_icon_str = "[![Static Badge](https://img.shields.io/badge/DOI-168363?style=flate&logo=doi&logoColor=white)]({})"
 #bib_icon_str = "[![Static Badge](https://img.shields.io/badge/BibTeX-168363?style=flate&logo=bibtex&logoColor=white)]({})"
 
@@ -111,6 +113,10 @@ with open (file_md, "w") as fmd:
         istrt = bib_str.find('{') + 1
         istop = bib_str[::-1].find('}') + 1
         bib_fmt = bib_str[0:istrt] + bib_str[istrt:-istop].replace('{','').replace('}','') + bib_str[-istop:-1]
-        fmd.write(new_md + bib_icon_str + bib_fmt.replace(',', ',  ') + "\n\n")
+
+        if abstract != 'null':
+           fmd.write(new_md + bib_icon_str.format("(2)") + bib_fmt.replace(',', ',  ') + "\n\n 2. {}\n\n".format(abstract))
+        else:
+           fmd.write(new_md + bib_icon_str.format("") + bib_fmt.replace(',', ',  ') + "\n\n")
 
 fmd.close()

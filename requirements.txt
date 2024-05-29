@@ -9,3 +9,4 @@ mkdocs-redirects
 markdown-customblocks
 pybtex~=0.24.0
 pypandoc_binary~=1.13
+Pygments~=2.18.0

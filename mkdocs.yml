@@ -35,6 +35,8 @@ theme:
       - search.share
       - search.suggest
       - content.tooltip
+      - content.code.copy    # button to copy code
+      - content.code.annotate  # allow code annotation
       #- content.action.view
       #- content.action.edit
    font:
@@ -90,7 +92,11 @@ markdown_extensions:
    - customblocks  # create a block
    - pymdownx.highlight: # highlight of code blocks
         linenums_style: pymdownx-inline
+        anchor_linenums: true
+        line_spans: __span
+        pygments_lang_class: true
    - pymdownx.inlinehilite # highlight inline code blocks
+
 
 # plugins
 plugins:
@@ -187,3 +193,6 @@ nav:
 # extra
 extra_css:
    - assets/stylesheets/link-embeds.css
+
+extra_javascript:
+   - assets/javascripts/change-annotation-icon.js
