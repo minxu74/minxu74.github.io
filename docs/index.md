@@ -14,20 +14,20 @@ icon: material/account-arrow-right-outline
     All opinions expressed on this site are my own and do not reflect the views of my employees.
 
 
-![Min Xu's Photo](./assets/image/MinXu.jpg){ align=right width=80 }
+![Min Xu's Photo](./assets/image/MinXu.jpg){ align=right width=88 }
 
-I am __Min Xu__, a staff scientist at the [Computational Sciences and Engineering Division](https://www.ornl.gov/division/csed), 
+I am __Min Xu__, an earth system modeler and staff scientist in the [Computational Sciences and Engineering Division](https://www.ornl.gov/division/csed) at 
 [Oak Ridge National Laboratory](https://www.ornl.gov). 
 
 ## Hobbies
 
+:fontawesome-solid-code:
 :fontawesome-solid-person-running:
 :fontawesome-solid-person-hiking:
 :fontawesome-solid-chess-knight:
 :fontawesome-solid-table-tennis-paddle-ball:
 :material-tennis:
 :material-sleep:
-
 
 ## Research Interest
 

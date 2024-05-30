@@ -1,5 +1,5 @@
 ---
-icon: material/arrow-projectile-multiple
+icon: octicons/file-code-16
 ---
 
 # Projects
