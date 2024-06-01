@@ -159,9 +159,9 @@ plugins:
   - mkdocs-jupyter
   #- include-markdown  # tried and it is so slow
   #- mknotebooks
-  - redirects:
-      redirect_maps:
-         'projects/gpu.md': 'https://gpu.org'
+  #- redirects:
+  #    redirect_maps:
+  #       'projects/gpu.md': 'https://gpu.org'
       
 
 
