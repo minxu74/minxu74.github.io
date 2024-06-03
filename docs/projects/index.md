@@ -9,7 +9,7 @@ icon: octicons/file-code-16
 
 ## Current projects
 
-[![RUBISCO logo](https://avatars.githubusercontent.com/u/36375040?s=200&v=4){ align=left width=80 }](https://bgc-feedbacks.org){:target="_blank"}
+[![RUBISCO logo](https://avatars.githubusercontent.com/u/36375040?s=200&v=4){ align=left width=80 }](rubisco.md){:target="_blank"}
 __RUBISCO__: Reducing Uncertainties in Biogeochemical Interactions through Synthesis and Computation [:material-github:](https://github.com/rubisco-sfa)
 [:material-web:](https://bgc-feedbacks.org)
 
@@ -17,7 +17,7 @@ __RUBISCO__: Reducing Uncertainties in Biogeochemical Interactions through Synth
 
 ---
 
-[![ESGF2-logo](https://avatars.githubusercontent.com/u/84809734?s=200&v=4){ align=left width=80}](https://nvcl.energy.gov/activity/earth-system-grid-federation-2){:target="_blank"}
+[![ESGF2-logo](https://avatars.githubusercontent.com/u/84809734?s=200&v=4){ align=left width=80}](esgf.md){:target="_blank"}
 __ESGF2__: Earth System Grid Federation 2 
 [:material-github:](https://github.com/esgf2-us)
 [:material-web:](https://esgf2-us.github.io/)
