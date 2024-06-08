@@ -17,7 +17,7 @@ __RUBISCO__: Reducing Uncertainties in Biogeochemical Interactions through Synth
 
 ---
 
-[![ESGF2-logo](https://avatars.githubusercontent.com/u/84809734?s=200&v=4){ align=left width=80}](esgf.md){:target="_blank"}
+[![ESGF2-logo](https://avatars.githubusercontent.com/u/84809734?s=200&v=4){ align=left width=80}](esgf2.md){:target="_blank"}
 __ESGF2__: Earth System Grid Federation 2 
 [:material-github:](https://github.com/esgf2-us)
 [:material-web:](https://esgf2-us.github.io/)

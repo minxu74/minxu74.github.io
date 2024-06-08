@@ -39,6 +39,34 @@ My education and employee time line is as follows:
       commit id: "2055"
 ```
 
+=== "Oak Ridge, TN"
+
+    ![ornl logo](../assets/image/ornl_logo.png){ align=right width=108 }
+
+    [Computational Sciences and Engineering Division](https://www.ornl.gov/division/csed), [Oak Ridge National Laboratory](https://www.ornl.gov)
+
+=== "College Park, MD"
+
+    ![essic logo](../assets/image/essic_logo.jpg){ align=right width=108 }
+
+    [Earth System Science Interdisciplinary Center](https://essic.umd.edu), [University of Maryand at College Park](https://umd.edu)
+
+=== "Urbana, IL"
+
+    ![isws logo](../assets/image/isws_logo.png){ align=right width=88 }
+
+    [Illinois State Water Survey](https://isws.illinois.edu), [University of Illinois at Urbana and Champaign](https://www.illinois.edu)
+
+=== "Nanjing, China"
+
+     ![nju logo](../assets/image/Nanjing_University_Logo.svg){ align=right width=88 }
+
+     [Department of Atmospheric Sciences](https://as.nju.edu.cn), [Nanjing University](https://www.nju.edu.cn)
+
+     :   Bachelor, major in Atmospheric Physics and Minor Electronic Engineering
+     :   Master in Atmospheric Physics
+     :   Ph.D. in Atmospheric Sciences
+
 === "Shengze, China"
 
      Shengze Renminjie Primary School
@@ -47,28 +75,10 @@ My education and employee time line is as follows:
 
      Shengze High School
 
-
-=== "Nanjing, China"
-
-     [Department of Atmospheric Sciences](https://as.nju.edu.cn), [Nanjing University](https://www.nju.edu.cn)
-
-     :   Bachelor, major in Atmospheric Physics and Minor Electronic Engineering
-     :   Master in Atmospheric Physics
-     :   Ph.D. in Atmospheric Sciences
-
-=== "Urbana, IL"
-
-    [Illinois State Water Survey](https://isws.illinois.edu), [University of Illinois at Urbana and Champaign](https://www.illinois.edu)
+     ![szzx_logo](../assets/image/szzx_logo.png)
 
 
-=== "College Park, MD"
 
-    [Earth System Science Interdisciplinary Center](https://essic.umd.edu), [University of Maryand at College Park](https://umd.edu)
-
-
-=== "Oak Ridge, TN"
-
-    [Computational Sciences and Engineering Division](https://www.ornl.gov/division/csed), [Oak Ridge National Laboratory](https://www.ornl.gov)
 
 
 

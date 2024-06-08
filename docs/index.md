@@ -14,7 +14,7 @@ icon: material/account-arrow-right-outline
     All opinions expressed on this site are my own and do not reflect the views of my employees.
 
 
-![Min Xu's Photo](./assets/image/MinXu.jpg){ align=right width=88 }
+[![Min Xu's Photo](./assets/image/MinXu.jpg){ align=right width=88 }](bio/index.md)
 
 I am __Min Xu__, an earth system modeler and staff scientist in the [Computational Sciences and Engineering Division](https://www.ornl.gov/division/csed) at 
 [Oak Ridge National Laboratory](https://www.ornl.gov). Before that, I was a climate modeler at the [Illinois State Water Survey](https://www.isws.illinois.edu) and 
