@@ -44,6 +44,7 @@ jobs:
            run: |
               mkdocs build --verbose --clean
               mkdocs --version
+              touch ./site/.nojekyll
 
          - name: deploy-gh-page
            uses: JamesIves/github-pages-deploy-action@v4
