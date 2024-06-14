@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <title></title>
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="css/slides-extended.css" />
+    <link rel="stylesheet" href="dist/theme/black.css" id="theme" />
+    <link rel="stylesheet" href="plugin/highlight/zenburn.css" />
+    <link rel="stylesheet" href="plugin/customcontrols/style.css">
+
+
+
+    <script defer src="dist/fontawesome/all.min.js"></script>
+
+    <script type="text/javascript">
+        function pageInIframe() {
+            return (window.location !== window.parent.location);
+        }
+
+        let forgetPop = true;
+        function onPopState(event) {
+            if(forgetPop){
+                forgetPop = false;
+            } else if( pageInIframe()) {
+                parent.postMessage(event.target.location.href, "app://obsidian.md");
+            }
+        }
+        window.onpopstate = onPopState;
+        window.onmessage = event => {
+            if(event.data == "reload"){
+                window.document.location.reload();
+            }
+            forgetPop = true;
+        }
+
+        function fitElements() {
+            const itemsToFit = document.getElementsByClassName('fitText');
+            for (const item in itemsToFit) {
+                if (Object.hasOwnProperty.call(itemsToFit, item)) {
+                    const element = itemsToFit[item];
+                    fitElement(element, 1, 1000);
+                    element.classList.remove('fitText');
+                }
+            }
+        }
+
+        function fitElement(element, start, end) {
+
+            let size = (end + start) / 2;
+            element.style.fontSize = `${size}px`;
+
+            if (Math.abs(start - end) < 1) {
+                while (element.scrollHeight > element.offsetHeight) {
+                    size--;
+                    element.style.fontSize = `${size}px`;
+                }
+                return;
+            }
+
+            if (element.scrollHeight > element.offsetHeight) {
+                fitElement(element, start, size);
+            } else {
+                fitElement(element, size, end);
+            }
+        }
+
+
+        document.onreadystatechange = () => {
+            fitElements();
+            if (document.readyState === 'complete') {
+                if (pageInIframe() && window.location.href.indexOf("?export") != -1){
+                    parent.postMessage(event.target.location.href, "app://obsidian.md");
+                }
+                if (window.location.href.indexOf("print-pdf") != -1){
+                    let stateCheck = setInterval(() => {
+                        clearInterval(stateCheck);
+                        window.print();
+                    }, 250);
+                }
+            }
+        };
+    </script>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides"><section  data-markdown><script type="text/template"><!-- .slide: class="drop" data-background-image="https://picsum.photos/id/177/2515/1830" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1200px; width: 1920px; min-height: 1200px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<div class="has-light-background" style="background-color: #EEB73F; padding: 250px 0  250px 800px; box-sizing: border-box; position: absolute; left: 20%; top: 20%; height: 80%; width: 80%; display: flex; flex-direction: column; align-items: start; justify-content: space-evenly" align="left">
+
+
+# Minml<!-- .element: style="letter-spacing: 1.5rem" -->
+##### Modern Presentation Template
+</div>
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="has-light-background drop" data-background-color="white" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1200px; width: 1920px; min-height: 1200px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<div class="has-light-background" style="background-color: #EEB73F; position: absolute; left: 0%; top: 15%; height: 85%; width: 81%; display: flex; flex-direction: column; align-items: start; justify-content: center" >
+</div>
+
+<div class="has-light-background" style="background-color: #EEB73F; padding: 50px; box-sizing: border-box; position: absolute; left: 0%; top: 15%; height: 85%; width: 27%; display: flex; flex-direction: column; align-items: start; justify-content: space-evenly" align="justify">
+
+
+<img src="https://picsum.photos/id/1005/500/400" alt="" style="object-fit: scale-down">
+
+
+**Agenda 01**
+
+**Lorem Ipsum** is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s 
+<!-- .element: style="font-size: 24px" -->
+</div>
+
+<div class="has-light-background" style="background-color: #EEB73F; padding: 50px; box-sizing: border-box; position: absolute; left: 27%; top: 15%; height: 85%; width: 27%; display: flex; flex-direction: column; align-items: start; justify-content: space-evenly" align="justify">
+
+
+<img src="https://picsum.photos/id/1010/500/400" alt="" style="object-fit: scale-down">
+
+
+**Agenda 02**
+
+**Lorem Ipsum** is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s 
+<!-- .element: style="font-size: 24px" -->
+</div>
+
+<div class="has-light-background" style="background-color: #EEB73F; padding: 50px; box-sizing: border-box; position: absolute; left: 54%; top: 15%; height: 85%; width: 27%; display: flex; flex-direction: column; align-items: start; justify-content: space-evenly" align="justify">
+
+
+<img src="https://picsum.photos/id/1025/500/400" alt="" style="object-fit: scale-down">
+
+
+**Agenda 03**
+
+**Lorem Ipsum** is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s 
+<!-- .element: style="font-size: 24px" -->
+</div>
+
+Presentation Agenda <!-- .element: style="font-size: 88px; transform: rotate(90deg); position: absolute; left: 57%; top: 48%; height: 20%; width: 60%; display: flex; flex-direction: column; align-items: start; justify-content: center" -->
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="has-light-background drop" data-background-color="white" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1200px; width: 1920px; min-height: 1200px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+## The abnormal design agency<!-- .element: style="position: absolute; left: 60%; top: 3%; height: 35%; width: 30%; display: flex; flex-direction: column; align-items: start; justify-content: space-evenly" align="left" -->
+
+<img src="https://picsum.photos/id/110/600/400" alt="" style="position: absolute; left: 26%; top: 12%; height: 35%; width: 30%; display: flex; flex-direction: column; align-items: start; justify-content: center; object-fit: fill">
+
+
+###### Minimo Studio<!-- .element: style="position: absolute; left: 11%; top: 55%; height: 5%; width: 15%; display: flex; flex-direction: column; align-items: start; justify-content: space-evenly" align="left" -->
+
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
+<!-- .element: style="font-size: 24px; position: absolute; left: 11%; top: 58%; height: 30%; width: 30%; display: flex; flex-direction: column; align-items: start; justify-content: space-evenly" align="justify" -->
+
+<img src="https://picsum.photos/id/112/500/400" alt="" style="position: absolute; left: 47%; top: 40%; height: 45%; width: 30%; display: flex; flex-direction: column; align-items: start; justify-content: center; object-fit: fill">
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="has-light-background drop" data-background-color="white" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1200px; width: 1920px; min-height: 1200px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<div class="has-light-background" style="background-color: #EEB73F; position: absolute; left: 5%; top: 0%; height: 100%; width: 35%; display: flex; flex-direction: column; align-items: start; justify-content: center" >
+</div>
+
+<div class="" style="transform: rotate(-90deg); position: absolute; left: -10%; top: 40%; height: 20%; width: 50%; display: flex; flex-direction: column; align-items: start; justify-content: center" >
+
+
+# The Story of Us
+##### A few words about the Studio
+</div>
+
+<img src="https://picsum.photos/id/1068/600/400" alt="" style="position: absolute; left: 28%; top: 10%; height: 40%; width: 32%; display: flex; flex-direction: column; align-items: start; justify-content: center; object-fit: fill">
+
+
+<img src="https://picsum.photos/id/113/600/400" alt="" style="position: absolute; left: 28%; top: 50%; height: 40%; width: 32%; display: flex; flex-direction: column; align-items: start; justify-content: center; object-fit: fill">
+
+
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
+<!-- .element: style="font-size: 24px; position: absolute; left: 65%; top: 15%; height: 30%; width: 25%; display: flex; flex-direction: column; align-items: start; justify-content: space-evenly" align="justify" -->
+
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
+<!-- .element: style="font-size: 24px; position: absolute; left: 65%; top: 55%; height: 30%; width: 25%; display: flex; flex-direction: column; align-items: start; justify-content: space-evenly" align="justify" -->
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="has-light-background drop" data-background-color="white" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1200px; width: 1920px; min-height: 1200px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<div class="" style="position: absolute; left: 10%; top: 25%; height: 50%; width: 30%; display: flex; flex-direction: column; align-items: start; justify-content: space-evenly" align="justify">
+
+
+**Stephanie Poetri**<!-- .element: style="font-size: 79px" -->
+
+*Brand Consultant*
+
+<br><br>
+
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. <!-- .element: style="font-size: 28px" -->
+</div>
+
+<div class="has-light-background" style="background-color: #EEB73F; position: absolute; left: 52%; top: 18%; height: 70%; width: 35%; display: flex; flex-direction: column; align-items: start; justify-content: center" >
+</div>
+
+<img src="https://picsum.photos/id/21/450/400" alt="" style="position: absolute; left: 49%; top: 23%; height: 60%; width: 25%; display: flex; flex-direction: column; align-items: start; justify-content: center; object-fit: fill">
+
+
+# Founder<!-- .element: style="transform: rotate(90deg); position: absolute; left: 68%; top: 48%; height: 10%; width: 25%; display: flex; flex-direction: column; align-items: start; justify-content: center" -->
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="has-light-background drop" data-background-color="white" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1200px; width: 1920px; min-height: 1200px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<div class="" style="padding: 0 30px; box-sizing: border-box; position: absolute; left: 14%; top: 10%; height: 15%; width: 72%; display: flex; flex-direction: column; align-items: start; justify-content: space-evenly" align="left">
+
+
+# Values
+##### A few words about values
+</div>
+<div class="" style="padding: 0 30px; box-sizing: border-box; position: absolute; left: 14%; top: 45%; height: 55%; width: 24%; display: flex; flex-direction: column; align-items: start; justify-content: space-between" align="justify">
+
+
+##### **Value 01**
+
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s <!-- .element: style="font-size: 20px" -->
+
+<img src="https://picsum.photos/id/225/460/360" alt="" style="max-height: 100%; max-width: 100%; object-fit: scale-down">
+
+</div>
+<div class="" style="padding: 0 30px; box-sizing: border-box; position: absolute; left: 38%; top: 45%; height: 55%; width: 24%; display: flex; flex-direction: column; align-items: start; justify-content: space-between" align="justify">
+
+
+##### **Value 02**
+
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s <!-- .element: style="font-size: 20px" -->
+
+<img src="https://picsum.photos/id/24/460/360" alt="" style="max-height: 100%; max-width: 100%; object-fit: scale-down">
+
+</div>
+<div class="" style="padding: 0 30px; box-sizing: border-box; position: absolute; left: 62%; top: 45%; height: 55%; width: 24%; display: flex; flex-direction: column; align-items: start; justify-content: space-between" align="justify">
+
+
+##### **Value 03**
+
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s <!-- .element: style="font-size: 20px" -->
+
+<img src="https://picsum.photos/id/26/460/360" alt="" style="max-height: 100%; max-width: 100%; object-fit: scale-down">
+
+</div>
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="has-light-background drop" data-background-color="white" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1200px; width: 1920px; min-height: 1200px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<div class="" style="padding: 0 30px; box-sizing: border-box; position: absolute; left: 5%; top: 25%; height: 40%; width: 32%; display: flex; flex-direction: column; align-items: start; justify-content: space-evenly" align="left">
+
+
+# Our Vision
+#### We turn cultural Value, into company Value
+</div>
+
+<img src="https://picsum.photos/id/548/460/360" alt="" style="position: absolute; left: 40%; top: 18%; height: 62%; width: 45%; display: flex; flex-direction: column; align-items: start; justify-content: center; object-fit: fill">
+
+
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. <!-- .element: style="font-size: 24px; background-color: #EEB73F; padding: 50px; box-sizing: border-box; position: absolute; left: 65%; top: 50%; height: 40%; width: 30%; display: flex; flex-direction: column; align-items: start; justify-content: space-evenly" class="has-light-background" align="justify" -->
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="has-light-background drop" data-background-color="white" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1200px; width: 1920px; min-height: 1200px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<div class="has-light-background" style="background-color: #EEB73F; position: absolute; left: 0%; top: 0%; height: 100%; width: 22%; display: flex; flex-direction: column; align-items: start; justify-content: center" >
+</div>
+
+<div class="" style="transform: rotate(-90deg); position: absolute; left: -15%; top: 40%; height: 20%; width: 50%; display: flex; flex-direction: column; align-items: start; justify-content: center" >
+
+
+## Meet the Expert
+##### Studio Partners
+</div>
+
+<div class="" style="position: absolute; left: 60%; top: 12%; height: 10%; width: 15%; display: flex; flex-direction: column; align-items: start; justify-content: space-evenly" align="left">
+
+
+##### Killie Groover
+Branding Specialist <!-- .element: style="font-size: 24px" -->
+</div>
+
+<img src="https://picsum.photos/id/1005/300/300" alt="" style="position: absolute; left: 75%; top: 5%; height: 25%; width: 15%; display: flex; flex-direction: column; align-items: start; justify-content: center; object-fit: fill">
+
+
+<div class="" style="position: absolute; left: 30%; top: 45%; height: 10%; width: 15%; display: flex; flex-direction: column; align-items: start; justify-content: space-evenly" align="left">
+
+
+##### Erik Keagan
+Creative Director <!-- .element: style="font-size: 24px" -->
+</div>
+
+<img src="https://picsum.photos/id/1010/300/300" alt="" style="position: absolute; left: 45%; top: 37%; height: 25%; width: 15%; display: flex; flex-direction: column; align-items: start; justify-content: center; object-fit: fill">
+
+
+<div class="" style="position: absolute; left: 60%; top: 78%; height: 10%; width: 15%; display: flex; flex-direction: column; align-items: start; justify-content: space-evenly" align="left">
+
+
+##### Haley Gideon
+Marketing Expert <!-- .element: style="font-size: 24px" -->
+</div>
+
+<img src="https://picsum.photos/id/1025/300/300" alt="" style="position: absolute; left: 75%; top: 70%; height: 25%; width: 15%; display: flex; flex-direction: column; align-items: start; justify-content: center; object-fit: fill">
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="has-light-background drop" data-background-color="white" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1200px; width: 1920px; min-height: 1200px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<div class="has-light-background" style="background-color: #EEB73F; position: absolute; left: 5%; top: 0%; height: 100%; width: 63%; display: flex; flex-direction: column; align-items: start; justify-content: center" >
+</div>
+
+<div class="" style="position: absolute; left: 10%; top: 37%; height: 45%; width: 20%; display: flex; flex-direction: column; align-items: start; justify-content: space-evenly" align="justify">
+
+
+##### *Emily Oberman*
+	
+LoremIpsumLoremIpsum <!-- .element: style="font-size: 24px" -->
+
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
+<!-- .element: style="font-size: 24px" -->
+	
+</div>
+
+<img src="https://picsum.photos/id/64/300/300" alt="" style="position: absolute; left: 42%; top: 12%; height: 70%; width: 40%; display: flex; flex-direction: column; align-items: start; justify-content: center; object-fit: fill">
+
+
+### Editorial Designer<!-- .element: style="position: absolute; left: 71%; top: 25%; height: 10%; width: 28%; display: flex; flex-direction: column; align-items: start; justify-content: center" -->
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="has-light-background drop" data-background-color="white" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1200px; width: 1920px; min-height: 1200px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<div class="has-light-background" style="background-color: #EEB73F; position: absolute; left: 0%; top: 50%; height: 50%; width: 50%; display: flex; flex-direction: column; align-items: start; justify-content: center" >
+</div>
+
+<div class="" style="transform: rotate(-90deg); position: absolute; left: 5%; top: 61%; height: 8%; width: 20%; display: flex; flex-direction: column; align-items: start; justify-content: space-evenly" align="justify">
+
+
+##### *Michel Bierut*
+
+LoremIpsumLoremIpsum <!-- .element: style="font-size: 24px" -->
+</div>
+
+<img src="https://picsum.photos/id/659/300/300" alt="" style="position: absolute; left: 20%; top: 12%; height: 70%; width: 40%; display: flex; flex-direction: column; align-items: start; justify-content: center; object-fit: fill">
+
+
+<div class="" style="position: absolute; left: 65%; top: 20%; height: 40%; width: 25%; display: flex; flex-direction: column; align-items: start; justify-content: space-evenly" align="justify">
+
+
+### Graphic Designer
+
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
+<!-- .element: style="font-size: 24px" -->
+</div>
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" data-background-image="https://picsum.photos/id/733/5464/3643" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1200px; width: 1920px; min-height: 1200px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<div class="has-light-background" style="background-color: #EEB73F; padding: 100px 100px 100px 250px; box-sizing: border-box; position: absolute; left: 5%; top: 0%; height: 100%; width: 45%; display: flex; flex-direction: column; align-items: start; justify-content: space-evenly" align="left">
+
+
+##### Your Service
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+<!-- .element: style="font-size: 24px" -->
+
+##### Your Service
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+<!-- .element: style="font-size: 24px" -->
+
+##### Your Service
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+<!-- .element: style="font-size: 24px" -->
+	
+##### Your Service
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+<!-- .element: style="font-size: 24px" -->
+</div>
+<div class="" style="padding: 50px 0; box-sizing: border-box; position: absolute; left: 5%; top: 0%; height: 100%; width: 13%; display: flex; flex-direction: column; align-items: start; justify-content: center" >
+
+
+<i color="black" class="fas fa-address-card fa-2x"></i>
+
+<i color="black" class="fas fa-ambulance fa-2x"></i>
+
+<i color="black" class="fas fa-balance-scale-left fa-2x"></i>
+
+<i color="black" class="fas fa-broom fa-2x"></i>
+</div>
+
+<div class="" style="color: #000; position: absolute; left: 62%; top: 20%; height: 20%; width: 25%; display: flex; flex-direction: column; align-items: start; justify-content: space-evenly" align="justify">
+
+
+## What we do <!-- .element: style="color: #000" -->
+
+We help you create, grow and foster connections with your customers. And we think we're pretty good at it.
+<!-- .element: style="font-size: 28px" -->
+</div>
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="has-light-background drop" data-background-color="white" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1200px; width: 1920px; min-height: 1200px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<div class="has-light-background" style="background-color: #EEB73F; position: absolute; left: 5%; top: 0%; height: 100%; width: 63%; display: flex; flex-direction: column; align-items: start; justify-content: center" >
+</div>
+
+We help you create, grow and foster connections with your customers. And we think we're pretty good at it. <!-- .element: style="font-size: 28px; padding: 50px; box-sizing: border-box; position: absolute; left: 6%; top: 48%; height: 30%; width: 20%; display: flex; flex-direction: column; align-items: start; justify-content: center" -->
+
+<div class="" style="position: absolute; left: 25%; top: 0%; height: 100%; width: 25%; display: flex; flex-direction: column; align-items: start; justify-content: center" >
+
+
+<img src="https://picsum.photos/id/756/400/300" alt="" style="object-fit: scale-down">
+
+<img src="https://picsum.photos/id/76/400/300" alt="" style="object-fit: scale-down">
+
+<img src="https://picsum.photos/id/760/400/300" alt="" style="object-fit: scale-down">
+
+</div>
+
+# Our Services<!-- .element: style="transform: rotate(-90deg); position: absolute; left: 38%; top: 46%; height: 10%; width: 40%; display: flex; flex-direction: column; align-items: start; justify-content: center" -->
+
+<div class="" style="padding: 150px 50px; box-sizing: border-box; position: absolute; left: 70%; top: 0%; height: 100%; width: 25%; display: flex; flex-direction: column; align-items: start; justify-content: center" >
+
+
+###### Branding
+
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard
+<!-- .element: style="font-size: 20px" -->
+
+<br><br>
+
+###### Marketing
+
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard 
+<!-- .element: style="font-size: 20px" -->
+
+<br><br>
+
+###### Consulting
+
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard 
+<!-- .element: style="font-size: 20px" -->
+</div>
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="has-light-background drop" data-background-color="white" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1200px; width: 1920px; min-height: 1200px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<div class="has-light-background" style="background-color: #EEB73F; padding: 100px 180px 100px 250px; box-sizing: border-box; position: absolute; left: 50%; top: 0%; height: 100%; width: 50%; display: flex; flex-direction: column; align-items: start; justify-content: space-evenly" align="justify">
+
+
+##### Your Service
+
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+<!-- .element: style="font-size: 24px" -->
+
+##### Your Service
+
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+<!-- .element: style="font-size: 24px" -->
+
+##### Your Service
+
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+<!-- .element: style="font-size: 24px" -->
+
+##### Your Service
+
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+<!-- .element: style="font-size: 24px" -->
+</div>
+
+<img src="https://picsum.photos/id/885/800/1220" alt="" style="max-height: 100%; max-width: 100%; position: absolute; left: 10%; top: 10%; height: 80%; width: 40%; display: flex; flex-direction: column; align-items: start; justify-content: center; object-fit: fill">
+
+
+<div class="has-light-background" style="background-color: white; padding: 26px; box-sizing: border-box; opacity: 0.5; position: absolute; left: 18%; top: 40%; height: 40%; width: 27%; display: flex; flex-direction: column; align-items: start; justify-content: center" >
+</div>
+
+<div class="" style="padding: 26px; box-sizing: border-box; position: absolute; left: 18%; top: 40%; height: 40%; width: 27%; display: flex; flex-direction: column; align-items: start; justify-content: center" >
+
+
+## Work Process
+
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+<!-- .element: style="font-size: 28px; display: flex; flex-direction: column; align-items: start; justify-content: space-evenly" align="justify" -->
+</div>
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="has-light-background drop" data-background-color="white" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1200px; width: 1920px; min-height: 1200px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<div class="has-light-background" style="background-color: #EEB73F; position: absolute; left: 0%; top: 0%; height: 100%; width: 40%; display: flex; flex-direction: column; align-items: start; justify-content: center" align="">
+
+
+<img src="https://picsum.photos/id/756/400/300" alt="" style="object-fit: scale-down">
+
+<img src="https://picsum.photos/id/76/400/300" alt="" style="object-fit: scale-down">
+
+<img src="https://picsum.photos/id/760/400/300" alt="" style="object-fit: scale-down">
+
+</div>
+
+<div class="" style="transform: rotate(90deg); position: absolute; left: 60%; top: 43%; height: 15%; width: 60%; display: flex; flex-direction: column; align-items: start; justify-content: center" >
+
+
+# Business Strategy
+#### A few words about strategy
+</div>
+
+<div class="" style="padding: 130px 85px; box-sizing: border-box; position: absolute; left: 40%; top: 0%; height: 100%; width: 40%; display: flex; flex-direction: column; align-items: start; justify-content: space-evenly" align="left">
+
+
+### Keep it Simple
+
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s<!-- .element: style="font-size: 24px; padding: 0 60px 0 0; box-sizing: border-box; display: flex; flex-direction: column; align-items: start; justify-content: space-evenly" align="justify" -->
+
+### Keep it real
+
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s<!-- .element: style="font-size: 24px; padding: 0 60px 0 0; box-sizing: border-box; display: flex; flex-direction: column; align-items: start; justify-content: space-evenly" align="justify" -->
+
+### Quality over Quantity
+
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s<!-- .element: style="font-size: 24px; padding: 0 60px 0 0; box-sizing: border-box; display: flex; flex-direction: column; align-items: start; justify-content: space-evenly" align="justify" -->
+</div>
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="has-light-background drop" data-background-color="white" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1200px; width: 1920px; min-height: 1200px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<div class="" style="padding: 100px 0; box-sizing: border-box; position: absolute; left: 0%; top: 0%; height: 30%; width: 100%; display: flex; flex-direction: column; align-items: start; justify-content: center" >
+
+
+##### Marketing Speciality
+## Success Marketing
+</div>
+
+<div class="has-light-background flex-even" style="background-color: #EEB73F; padding: 0 160px; box-sizing: border-box; position: absolute; left: 0%; top: 30%; height: 70%; width: 100%; display: flex; flex-direction: row; align-items: start; justify-content: space-evenly" align="top">
+
+
+<img src="https://picsum.photos/id/978/450/700" alt="" style="object-fit: scale-down">
+
+<img src="https://picsum.photos/id/996/450/700" alt="" style="object-fit: scale-down">
+
+<img src="https://picsum.photos/id/1011/450/700" alt="" style="object-fit: scale-down">
+
+</div>
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="has-light-background drop" data-background-color="#EEB73F" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1200px; width: 1920px; min-height: 1200px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<div class="" style="position: absolute; left: 0%; top: 0%; height: 100%; width: 30%; display: flex; flex-direction: column; align-items: start; justify-content: center" >
+
+
+<img src="https://picsum.photos/id/1015/576/1200" alt="" style="max-width: 100%; max-height: 100%; object-fit: scale-down">
+
+</div>
+
+<div class="" style="padding: 100px; box-sizing: border-box; position: absolute; left: 30%; top: 0%; height: 50%; width: 35%; display: flex; flex-direction: column; align-items: start; justify-content: space-evenly" align="left">
+
+
+## Strength
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+<!-- .element: style="font-size: 24px; display: flex; flex-direction: column; align-items: start; justify-content: space-evenly" align="justify" -->
+</div>
+
+<div class="" style="padding: 100px; box-sizing: border-box; position: absolute; left: 65%; top: 0%; height: 50%; width: 35%; display: flex; flex-direction: column; align-items: start; justify-content: space-evenly" align="left">
+
+
+## Weakness
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+<!-- .element: style="font-size: 24px; display: flex; flex-direction: column; align-items: start; justify-content: space-evenly" align="justify" -->
+</div>
+
+<div class="" style="padding: 100px; box-sizing: border-box; position: absolute; left: 30%; top: 50%; height: 50%; width: 35%; display: flex; flex-direction: column; align-items: start; justify-content: space-evenly" align="left">
+
+
+## Threat
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+<!-- .element: style="font-size: 24px; display: flex; flex-direction: column; align-items: start; justify-content: space-evenly" align="justify" -->
+</div>
+
+<div class="" style="padding: 100px; box-sizing: border-box; position: absolute; left: 65%; top: 50%; height: 50%; width: 35%; display: flex; flex-direction: column; align-items: start; justify-content: space-evenly" align="left">
+
+
+## Opportunity
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+<!-- .element: style="font-size: 24px; display: flex; flex-direction: column; align-items: start; justify-content: space-evenly" align="justify" -->
+</div>
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="has-light-background drop" data-background-color="white" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1200px; width: 1920px; min-height: 1200px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<div class="" style="padding: 150px; box-sizing: border-box; position: absolute; left: 0%; top: 25%; height: 50%; width: 40%; display: flex; flex-direction: column; align-items: start; justify-content: space-evenly" align="left">
+
+
+# Clients
+These brands aren't trophies, they're friends we've met on our journey.<!-- .element: style="font-size: 28px; display: flex; flex-direction: column; align-items: start; justify-content: space-evenly" align="justify" -->
+</div>
+
+<div class="" style="position: absolute; left: 40%; top: 0%; height: 100%; width: 60%; display: flex; flex-direction: column; align-items: start; justify-content: center" >
+
+
+<img src="https://picsum.photos/id/1023/1152/1200" alt="" style="max-width: 100%; max-height: 100%; object-fit: scale-down">
+
+</div>
+
+<div class="has-light-background" style="background-color: white; opacity: 0.5; position: absolute; left: 50%; top: 15%; height: 70%; width: 40%; display: flex; flex-direction: column; align-items: start; justify-content: center" >
+</div>
+
+<div class="" style="padding: 50px; box-sizing: border-box; position: absolute; left: 50%; top: 15%; height: 35%; width: 20%; display: flex; flex-direction: column; align-items: start; justify-content: space-evenly" align="left">
+
+
+#### Reuters
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+<!-- .element: style="font-size: 24px; display: flex; flex-direction: column; align-items: start; justify-content: space-evenly" align="justify" -->
+</div>
+
+<div class="" style="padding: 50px; box-sizing: border-box; position: absolute; left: 70%; top: 15%; height: 35%; width: 20%; display: flex; flex-direction: column; align-items: start; justify-content: space-evenly" align="left">
+
+
+#### Espn
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+<!-- .element: style="font-size: 24px; display: flex; flex-direction: column; align-items: start; justify-content: space-evenly" align="justify" -->
+</div>
+
+<div class="" style="padding: 50px; box-sizing: border-box; position: absolute; left: 50%; top: 50%; height: 35%; width: 20%; display: flex; flex-direction: column; align-items: start; justify-content: space-evenly" align="left">
+
+
+#### Visa
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+<!-- .element: style="font-size: 24px; display: flex; flex-direction: column; align-items: start; justify-content: space-evenly" align="justify" -->
+</div>
+
+<div class="" style="padding: 50px; box-sizing: border-box; position: absolute; left: 70%; top: 50%; height: 35%; width: 20%; display: flex; flex-direction: column; align-items: start; justify-content: space-evenly" align="left">
+
+
+#### Guardian
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+<!-- .element: style="font-size: 24px; display: flex; flex-direction: column; align-items: start; justify-content: space-evenly" align="justify" -->
+</div>
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="has-light-background drop" data-background-color="white" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1200px; width: 1920px; min-height: 1200px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<div class="" style="position: absolute; left: 50%; top: 0%; height: 100%; width: 50%; display: flex; flex-direction: column; align-items: start; justify-content: center" >
+
+
+<img src="https://picsum.photos/id/141/960/1200" alt="" style="max-width: 100%; max-height: 100%; object-fit: scale-down">
+
+</div>
+
+<div class="" style="position: absolute; left: 50%; top: 5%; height: 40%; width: 50%; display: flex; flex-direction: column; align-items: start; justify-content: center" >
+
+
+# Our<br> Achievments
+
+##### success in numbers
+</div>
+
+<div class="has-light-background" style="background-color: #EEB73F; padding: 100px 300px; box-sizing: border-box; position: absolute; left: 0%; top: 0%; height: 100%; width: 50%; display: flex; flex-direction: column; align-items: start; justify-content: center" >
+
+
+# 40
+#### Clients
+
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+<!-- .element: style="font-size: 24px; display: flex; flex-direction: column; align-items: start; justify-content: space-evenly" align="justify" -->
+
+# 60
+#### Projects
+
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+<!-- .element: style="font-size: 24px; display: flex; flex-direction: column; align-items: start; justify-content: space-evenly" align="justify" -->
+	
+# 29
+#### Apps & Websites
+
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+<!-- .element: style="font-size: 24px; display: flex; flex-direction: column; align-items: start; justify-content: space-evenly" align="justify" -->
+</div>
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="has-light-background drop" data-background-color="white" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1200px; width: 1920px; min-height: 1200px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<div class="" style="transform: rotate(90deg); position: absolute; left: 56%; top: 43%; height: 15%; width: 60%; display: flex; flex-direction: column; align-items: start; justify-content: center" >
+
+
+# Pricing Table
+#### Subscription packages
+</div>
+
+<div class="" style="position: absolute; left: 0%; top: 10%; height: 40%; width: 25%; display: flex; flex-direction: column; align-items: start; justify-content: center" >
+
+
+<img src="https://picsum.photos/id/145/480/480" alt="" style="max-width: 100%; max-height: 100%; object-fit: scale-down">
+
+</div>
+<div class="" style="position: absolute; left: 5%; top: 50%; height: 40%; width: 20%; display: flex; flex-direction: column; align-items: start; justify-content: center" >
+
+
+### Basic
+# $ 299
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+<!-- .element: style="font-size: 24px; display: flex; flex-direction: column; align-items: start; justify-content: space-evenly" align="justify" -->
+</div>
+
+<div class="" style="position: absolute; left: 25%; top: 10%; height: 40%; width: 25%; display: flex; flex-direction: column; align-items: start; justify-content: center" >
+
+
+<img src="https://picsum.photos/id/146/480/480" alt="" style="max-width: 100%; max-height: 100%; object-fit: scale-down">
+
+</div>
+<div class="" style="padding: 0 10px 0 20px; box-sizing: border-box; position: absolute; left: 27%; top: 50%; height: 40%; width: 20%; display: flex; flex-direction: column; align-items: start; justify-content: center" >
+
+
+### Premium
+# $ 499
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+<!-- .element: style="font-size: 24px; display: flex; flex-direction: column; align-items: start; justify-content: space-evenly" align="justify" -->
+</div>
+
+<div class="" style="position: absolute; left: 50%; top: 10%; height: 40%; width: 25%; display: flex; flex-direction: column; align-items: start; justify-content: center" >
+
+
+<img src="https://picsum.photos/id/175/480/480" alt="" style="max-width: 100%; max-height: 100%; object-fit: scale-down">
+
+</div>
+<div class="" style="position: absolute; left: 50%; top: 50%; height: 40%; width: 20%; display: flex; flex-direction: column; align-items: start; justify-content: center" >
+
+
+### Pro
+# $ 799
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+<!-- .element: style="font-size: 24px; display: flex; flex-direction: column; align-items: start; justify-content: space-evenly" align="justify" -->
+</div>
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="has-light-background drop" data-background-color="white" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1200px; width: 1920px; min-height: 1200px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<div class="has-light-background" style="background-color: #EEB73F; position: absolute; left: 0%; top: 0%; height: 100%; width: 90%; display: flex; flex-direction: column; align-items: start; justify-content: center" >
+</div>
+
+*Keep the text simply* <!-- .element: style="position: absolute; left: 10%; top: 18%; height: 5%; width: 20%; display: flex; flex-direction: column; align-items: start; justify-content: space-evenly" align="left" -->
+
+<div class="" style="position: absolute; left: 5%; top: 40%; height: 40%; width: 60%; display: flex; flex-direction: column; align-items: start; justify-content: center" >
+
+<img src="https://picsum.photos/id/183/1200/900" alt="" style="object-fit: scale-down">
+
+</div>
+
+# It's a break section
+<!-- .element: style="position: absolute; left: 65%; top: 58%; height: 30%; width: 30%; display: flex; flex-direction: column; align-items: start; justify-content: space-evenly" align="left" -->
+</div></script></section></div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+
+    <script src="plugin/zoom/zoom.js"></script>
+    <script src="plugin/math/math.js"></script>
+    <script src="plugin/mermaid/mermaid.js"></script>
+    <script src="plugin/chart/chart.min.js"></script>
+    <script src="plugin/chart/plugin.js"></script>
+    <script src="plugin/customcontrols/plugin.js"></script>
+
+    <script>
+        function extend() {
+            const target = {};
+            for (let i = 0; i < arguments.length; i++) {
+                const source = arguments[i];
+                for (const key in source) {
+                    if (source.hasOwnProperty(key)) {
+                        target[key] = source[key];
+                    }
+                }
+            }
+            return target;
+        }
+
+        function isLight(color) {
+            let hex = color.replace('#', '');
+
+            // convert #fff => #ffffff
+            if (hex.length == 3) {
+                hex = `${hex[0]}${hex[0]}${hex[1]}${hex[1]}${hex[2]}${hex[2]}`;
+            }
+
+            const c_r = parseInt(hex.substr(0, 2), 16);
+            const c_g = parseInt(hex.substr(2, 2), 16);
+            const c_b = parseInt(hex.substr(4, 2), 16);
+            const brightness = ((c_r * 299) + (c_g * 587) + (c_b * 114)) / 1000;
+            return brightness > 155;
+        }
+
+        const bgColor = getComputedStyle(document.documentElement).getPropertyValue('--r-background-color').trim();
+
+        if (isLight(bgColor)) {
+            document.body.classList.add('has-light-background');
+        } else {
+            document.body.classList.add('has-dark-background');
+        }
+
+        // default options to init reveal.js
+        const defaultOptions = {
+            controls: true,
+            progress: true,
+            history: true,
+            center: true,
+            transition: 'default', // none/fade/slide/convex/concave/zoom
+            plugins: [
+                RevealMarkdown,
+                RevealHighlight,
+                RevealZoom,
+                RevealNotes,
+                RevealMath.MathJax3,
+                RevealMermaid,
+                RevealChart,
+                RevealCustomControls,
+            ],
+            allottedTime: 120 * 1000,
+            mathjax3: {
+                mathjax: 'plugin/math/mathjax/tex-mml-chtml.js',
+            },
+            markdown: {
+                gfm: true,
+                mangle: true,
+                pedantic: false,
+                smartLists: false,
+                smartypants: false,
+            },
+            mermaid: {
+                theme: isLight ? 'default' : 'dark',
+            },
+            customcontrols: {
+                controls: [
+                ]
+            },
+        };
+
+        if ( pageInIframe() ) {
+            defaultOptions.scrollActivationWidth = 5;
+        }
+
+        // options from URL query string
+        const queryOptions = Reveal().getQueryHash() || {};
+
+        const options = extend(defaultOptions, {"controls":true,"progress":true,"slideNumber":true,"center":false,"transition":"slide","transitionSpeed":"default","width":1920,"height":1200,"margin":0}, queryOptions);
+    </script>
+
+    <script>
+      Reveal.initialize(options);
+    </script>
+</body>
+
+<!-- created with Slides Extended -->
+</html>
