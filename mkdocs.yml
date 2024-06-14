@@ -74,6 +74,7 @@ extra:
 
 # extensions
 markdown_extensions:
+   - meta
    - admonition # callouts/annotations
    - pymdownx.emoji:
         emoji_generator: !!python/name:material.extensions.emoji.to_svg
@@ -169,8 +170,36 @@ plugins:
   #- redirects:
   #    redirect_maps:
   #       'projects/gpu.md': 'https://gpu.org'
+
+  - glightbox:  # tried very slow, add 10 times time in building
+                # find the problem caused by the conflict with link-embed
+                # disable glightbox in frontmatter in the page with link-embed
+      touchNavigation: true
+      loop: false
+      effect: none
+      slide_effect: slide
+      width: 100%
+      height: auto
+      zoomable: true
+      draggable: true
+      skip_classes:
+        - custom-skip-class-name
+      auto_caption: false
+      caption_position: bottom
+      background: white
+      shadow: true
+      manual: true
       
 
+
+reveal:
+  path: ../../reveal.js/dist
+  transition: slide
+  theme:
+    name: white.css
+    path: theme
+  plugin:
+    path: ../../reveal.js/plugin
 
 # main page tree
 nav:
@@ -191,6 +220,8 @@ nav:
    - Jupyter Notebook Showcase: 
        - jupyternb/index.md
        - Plot NBP time series: jupyternb/check_nbp.ipynb
+   #- Test page:
+   #    - test/index.md
    - Blog:
        - blog/index.md
 

@@ -1,6 +1,7 @@
 ---
 title: Misc tools
 icon: material/tools
+glightbox: false
 ---
 
 

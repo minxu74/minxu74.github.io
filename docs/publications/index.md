@@ -1,4 +1,5 @@
 ---
+title: Publications
 icon: material/newspaper-variant-multiple
 ---
 
