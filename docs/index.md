@@ -20,6 +20,8 @@ I am __Min Xu__, an earth system modeler and staff scientist in the [Computation
 [Oak Ridge National Laboratory](https://www.ornl.gov). Before that, I was a climate modeler at the [Illinois State Water Survey](https://www.isws.illinois.edu) and 
 worked as a research associate in the [Earth System Science Interdisciplinary Center](https://essic.umd.edu) at the [University of Maryland, College Park](https://umd.edu). 
 
+My full [Curriculum Vitae](./DevResume-Theme/index.html)
+
 ## Hobbies
 
 :fontawesome-solid-code:
