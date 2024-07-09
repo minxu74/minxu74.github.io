@@ -37,7 +37,7 @@ theme:
       - content.tooltip
       - content.code.copy    # button to copy code
       - content.code.annotate  # allow code annotation
-      #- content.action.view
+      - content.action.view
       #- content.action.edit
    font:
       text: Open Sans 300 #Oswald #Open Sans  #Raleway
