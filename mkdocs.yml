@@ -71,6 +71,11 @@ extra:
         link: https://github.com/minxu74 
       - icon: fontawesome/brands/linkedin
         link: https://linkedin.com/in/minxu74
+   analytics:
+        provider: google
+        property: G-S2E4FP4ER0
+
+
 
 # extensions
 markdown_extensions:
