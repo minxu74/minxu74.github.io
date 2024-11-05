@@ -216,8 +216,6 @@ nav:
    - Jupyter Notebook Showcase: 
        - jupyternb/index.md
        - Plot NBP time series: jupyternb/check_nbp.ipynb
-   - Test page:
-       - test/index.md
    - Blog:
        - blog/index.md
 
