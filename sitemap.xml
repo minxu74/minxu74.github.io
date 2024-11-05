@@ -2,132 +2,130 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://minxu74.github.io/</loc>
-         <lastmod>2024-08-17</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2024-11-05</lastmod>
     </url>
     <url>
          <loc>https://minxu74.github.io/bio/</loc>
-         <lastmod>2024-08-17</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2024-11-05</lastmod>
     </url>
     <url>
          <loc>https://minxu74.github.io/blog/</loc>
-         <lastmod>2024-08-17</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2024-11-05</lastmod>
     </url>
     <url>
          <loc>https://minxu74.github.io/blog/2024/05/a-special-day/</loc>
-         <lastmod>2024-08-17</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2024-11-05</lastmod>
     </url>
     <url>
          <loc>https://minxu74.github.io/blog/2024/05/my-first-blog/</loc>
-         <lastmod>2024-08-17</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2024-11-05</lastmod>
     </url>
     <url>
          <loc>https://minxu74.github.io/jupyternb/</loc>
-         <lastmod>2024-08-17</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2024-11-05</lastmod>
     </url>
     <url>
          <loc>https://minxu74.github.io/jupyternb/check_nbp/</loc>
-         <lastmod>2024-08-17</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2024-11-05</lastmod>
     </url>
     <url>
          <loc>https://minxu74.github.io/math/</loc>
-         <lastmod>2024-08-17</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2024-11-05</lastmod>
     </url>
     <url>
          <loc>https://minxu74.github.io/projects/</loc>
-         <lastmod>2024-08-17</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2024-11-05</lastmod>
     </url>
     <url>
          <loc>https://minxu74.github.io/projects/esgf2/</loc>
-         <lastmod>2024-08-17</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2024-11-05</lastmod>
     </url>
     <url>
          <loc>https://minxu74.github.io/projects/geoengineering/</loc>
-         <lastmod>2024-08-17</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2024-11-05</lastmod>
     </url>
     <url>
          <loc>https://minxu74.github.io/projects/gpu/</loc>
-         <lastmod>2024-08-17</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2024-11-05</lastmod>
     </url>
     <url>
          <loc>https://minxu74.github.io/projects/rubisco/</loc>
-         <lastmod>2024-08-17</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2024-11-05</lastmod>
     </url>
     <url>
          <loc>https://minxu74.github.io/publications/</loc>
-         <lastmod>2024-08-17</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2024-11-05</lastmod>
     </url>
     <url>
          <loc>https://minxu74.github.io/publications/poster/</loc>
-         <lastmod>2024-08-17</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2024-11-05</lastmod>
     </url>
     <url>
          <loc>https://minxu74.github.io/publications/present/</loc>
-         <lastmod>2024-08-17</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2024-11-05</lastmod>
     </url>
     <url>
          <loc>https://minxu74.github.io/slides/Readme/</loc>
-         <lastmod>2024-08-17</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2024-11-05</lastmod>
+    </url>
+    <url>
+         <loc>https://minxu74.github.io/slides/ELM_Experimental_Simulations/dist/css/theme/</loc>
+         <lastmod>2024-11-05</lastmod>
+    </url>
+    <url>
+         <loc>https://minxu74.github.io/slides/ELM_Experimental_Simulations/plugin/chalkboard/</loc>
+         <lastmod>2024-11-05</lastmod>
+    </url>
+    <url>
+         <loc>https://minxu74.github.io/slides/ELM_Experimental_Simulations/plugin/chart/</loc>
+         <lastmod>2024-11-05</lastmod>
+    </url>
+    <url>
+         <loc>https://minxu74.github.io/slides/ELM_Experimental_Simulations/plugin/customcontrols/</loc>
+         <lastmod>2024-11-05</lastmod>
+    </url>
+    <url>
+         <loc>https://minxu74.github.io/slides/ELM_Experimental_Simulations/plugin/menu/</loc>
+         <lastmod>2024-11-05</lastmod>
+    </url>
+    <url>
+         <loc>https://minxu74.github.io/slides/ELM_Experimental_Simulations/plugin/menu/CONTRIBUTING/</loc>
+         <lastmod>2024-11-05</lastmod>
     </url>
     <url>
          <loc>https://minxu74.github.io/slides/Minml/dist/css/theme/</loc>
-         <lastmod>2024-08-17</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2024-11-05</lastmod>
     </url>
     <url>
          <loc>https://minxu74.github.io/slides/Minml/plugin/chalkboard/</loc>
-         <lastmod>2024-08-17</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2024-11-05</lastmod>
     </url>
     <url>
          <loc>https://minxu74.github.io/slides/Minml/plugin/chart/</loc>
-         <lastmod>2024-08-17</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2024-11-05</lastmod>
     </url>
     <url>
          <loc>https://minxu74.github.io/slides/Minml/plugin/customcontrols/</loc>
-         <lastmod>2024-08-17</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2024-11-05</lastmod>
     </url>
     <url>
          <loc>https://minxu74.github.io/slides/Minml/plugin/menu/</loc>
-         <lastmod>2024-08-17</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2024-11-05</lastmod>
     </url>
     <url>
          <loc>https://minxu74.github.io/slides/Minml/plugin/menu/CONTRIBUTING/</loc>
-         <lastmod>2024-08-17</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2024-11-05</lastmod>
     </url>
     <url>
          <loc>https://minxu74.github.io/tools/</loc>
-         <lastmod>2024-08-17</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2024-11-05</lastmod>
     </url>
     <url>
          <loc>https://minxu74.github.io/blog/archive/2024/</loc>
-         <lastmod>2024-08-17</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2024-11-05</lastmod>
     </url>
     <url>
          <loc>https://minxu74.github.io/blog/category/general/</loc>
-         <lastmod>2024-08-17</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2024-11-05</lastmod>
     </url>
 </urlset>
