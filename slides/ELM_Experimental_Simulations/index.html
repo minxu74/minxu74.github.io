@@ -217,7 +217,7 @@ gantt
 
 4. **Time step**: 3600 seconds for spinup and phase 1 and 2 simulations and 1800 seconds for phase 3 simulations.
 
-5. Some bug fixes in E3SM master since the above commit may be related:
+5. Some bug fixes in E3SM master since the above commit may impact our results as follows. But I did not notice any abnormal outputs caused by these bugs.
 
     - [\#6589](https://github.com/E3SM-Project/E3SM/pull/6589) (over 400k, due to the negative stem mass)
     
@@ -409,11 +409,11 @@ Phase 3: transition runs of **144 scenarios** from 1991 to 2014.
 
    __<u>2024-10-29.trans_EXPAI_RUBISCO_CMIP6_phase3_co2plus100.I20TRCNPRDCTCBC.hcru_hcru.pm-cpu.intel_001</u>__
    
-3. *Plus 200 ppm*: ambient CO`$_2$`+ 100 ppm
+3. *Plus 200 ppm*: ambient CO`$_2$`+ 200 ppm
     
     __<u>2024-10-29.trans_EXPAI_RUBISCO_CMIP6_phase3_co2plus200.I20TRCNPRDCTCBC.hcru_hcru.pm-cpu.intel_001</u>__
     
-4. *Plus 400 ppm*: ambient CO`$_2$`+ 100 ppm
+4. *Plus 400 ppm*: ambient CO`$_2$`+ 400 ppm
     
     __<u>2024-10-31.trans_EXPAI_RUBISCO_CMIP6_phase3_co2plus400.I20TRCNPRDCTCBC.hcru_hcru.pm-cpu.intel_001</u>__
 
@@ -458,7 +458,7 @@ GPP at 1990: 132.05 PgC
 
 ## Known problems in outputs <!-- .element: style="color: rgb(0, 121, 52)" -->
 
-There are some variables that have NaNs in certain soil depths. These variables are neither used by the model compset in our simulations nor impact our results.
+There are some variables that have NaNs in some soil depths. These variables are neither used by the model compset in our simulations nor impact our results.
 
 ```
   rec   date       time     depth     tot.    missing                      value             variable  
