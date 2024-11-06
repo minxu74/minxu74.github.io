@@ -40,7 +40,7 @@ theme:
       - content.action.view
       #- content.action.edit
    font:
-      text: Open Sans 300 #Oswald #Open Sans  #Raleway
+      text: Open Sans #Oswald #Open Sans  #Raleway
       code: Roboto Mono
    #favicon: assets/image/favicon.png
    favicon: assets/image/favicon.png
