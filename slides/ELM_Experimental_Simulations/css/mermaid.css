@@ -35,17 +35,17 @@
  } 
 
 .taskText {
-   font-size: 12px !important; 
+   font-size: 15px !important; 
 }
 .taskTextOutsideRight {
-   font-size: 12px !important; 
+   font-size: 15px !important; 
 }
 
 .taskTextOutsideLeft {
-   font-size: 12px !important; 
+   font-size: 15px !important; 
 }
 
 .sectionTitle {
-   font-size: 12px !important; 
+   font-size: 18px !important; 
    font-weight: bold;
 }
