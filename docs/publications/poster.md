@@ -14,3 +14,5 @@ __Under Construction__ :construction_site:
 
 ![](../_files/gpu_porting_agufm2019.jpg){ .on-glb width="30%" data-title="AGU fall meeting 2019" data-description="Porting SOCRATES and CASIM to GPU computing" }
 
+![](../_files/SAI_regional_terrestrial_ecosystem_poster_agu2024.jpg){ .on-glb width="30%" data-title="AGU fall meeting 2024" data-description="Regional impacts of SAI on terrestrial carbon cycles" }
+
