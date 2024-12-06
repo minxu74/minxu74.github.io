@@ -4,7 +4,6 @@ title: Presentations
 
 # Presentations
 
-- [A demo using Obsidian and Advanced Slides](../../slides/Minml/)
 
 # Previous presentations
 
