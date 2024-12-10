@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <title></title>
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="css/slides-extended.css" />
+    <link rel="stylesheet" href="dist/theme/consult.css" id="theme" />
+    <link rel="stylesheet" href="plugin/highlight/zenburn.css" />
+    <link rel="stylesheet" href="plugin/customcontrols/style.css">
+
+
+
+    <script defer src="dist/fontawesome/all.min.js"></script>
+
+    <script type="text/javascript">
+        function pageInIframe() {
+            return (window.location !== window.parent.location);
+        }
+
+        let forgetPop = true;
+        function onPopState(event) {
+            if(forgetPop){
+                forgetPop = false;
+            } else if( pageInIframe()) {
+                parent.postMessage(event.target.location.href, "app://obsidian.md");
+            }
+        }
+        window.onpopstate = onPopState;
+        window.onmessage = event => {
+            if(event.data == "reload"){
+                window.document.location.reload();
+            }
+            forgetPop = true;
+        }
+
+        function fitElements() {
+            const itemsToFit = document.getElementsByClassName('fitText');
+            for (const item in itemsToFit) {
+                if (Object.hasOwnProperty.call(itemsToFit, item)) {
+                    const element = itemsToFit[item];
+                    fitElement(element, 1, 1000);
+                    element.classList.remove('fitText');
+                }
+            }
+        }
+
+        function fitElement(element, start, end) {
+
+            let size = (end + start) / 2;
+            element.style.fontSize = `${size}px`;
+
+            if (Math.abs(start - end) < 1) {
+                while (element.scrollHeight > element.offsetHeight) {
+                    size--;
+                    element.style.fontSize = `${size}px`;
+                }
+                return;
+            }
+
+            if (element.scrollHeight > element.offsetHeight) {
+                fitElement(element, start, size);
+            } else {
+                fitElement(element, size, end);
+            }
+        }
+
+
+        document.onreadystatechange = () => {
+            fitElements();
+            if (document.readyState === 'complete') {
+                if (pageInIframe() && window.location.href.indexOf("?export") != -1){
+                    parent.postMessage(event.target.location.href, "app://obsidian.md");
+                }
+                if (window.location.href.indexOf("print-pdf") != -1){
+                    let stateCheck = setInterval(() => {
+                        clearInterval(stateCheck);
+                        window.print();
+                    }, 250);
+                }
+            }
+        };
+    </script>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides"><section  data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+# ILAMB for benchmarking ELM outputs
+
+
+### Min Xu
+December 10, 2024
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+## Requirements
+
+Demo is shown on NERSC, so
+1. NERSC account
+2. Basic knowledge and skills of Linux/Git, Python, and Conda virtual environment
+3. job submission on NERSC
+</div></script></section><section ><section data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+## ILAMB Installation 
+
+- ILAMB v2 (v3 is under active development, but new features shall be directly incorporated into v3)
+
+- Load software packages on NERSC
+```
+  > module av python
+-------------------------------------------------------------------------------------------------------------------- Cray Core Modules ---------------------------------------------------------------------------------------------------------------------  
+  cray-python/3.9.13.1    cray-python/3.10.10    cray-python/3.11.5 (D)  
+  
+-------------------------------------------------------------------------------------------------- /global/common/software/nersc/pe/modulefiles_hotfixes ---------------------------------------------------------------------------------------------------  
+  jamo/python-jamo  
+  
+---------------------------------------------------------------------------------------------------------------------- NERSC Modules -----------------------------------------------------------------------------------------------------------------------  
+  jamo/python-jamo    python/3.9-anaconda-2021.11    python/3.9    python/3.10    python/3.11 (L,D)
+
+  > module load python
+  > conda info --envs
+                         /global/cfs/projectdirs/e3sm/minxu/ilamb-venv/ilamb-venv-py37  
+gee                      /global/cfs/projectdirs/m2467/prj_minxu/myvenv/gee  
+mxCMOR                   /global/cfs/projectdirs/m2467/prj_minxu/myvenv/mxCMOR  
+mxESGF_py3.12            /global/cfs/projectdirs/m2467/prj_minxu/myvenv/mxESGF_py3.12  
+test_env                 /global/cfs/projectdirs/m2467/prj_minxu/myvenv/test_env  
+nersc-h5py               /global/common/software/nersc/pe/conda-envs/24.1.0/python-3.11/nersc-h5py  
+nersc-mpi4py             /global/common/software/nersc/pe/conda-envs/24.1.0/python-3.11/nersc-mpi4py  
+nersc-python          *  /global/common/software/nersc/pe/conda-envs/24.1.0/python-3.11/nersc-python  
+base                     /global/common/software/nersc/pe/conda/24.1.0/Miniconda3-py311_23.11.0-2
+
+  > module list PrgEnv
+Currently Loaded Modules Matching: PrgEnv
+  1) PrgEnv-gnu/8.5.0
+```
+
+- Clone the ILAMB v2 repository on NERSC:
+```
+  > git clone https://github.com/rubisco-sfa/ILAMB
+  > cd ILAMB
+  > git checkout v2.7.2
+  > git switch -c v2.7.2
+```
+</div></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+## ILAMB Installation (cont'd 1)
+
+- Install ILAMB using NERSC python with `conda` command
+```
+  > cd ILAMB
+  > conda create -p /global/common/software/m2467/mx_venv/ilamb python=3.13
+  > conda activate /global/common/software/m2467/mx_venv/ilamb
+  > conda env update -p /global/common/software/m2467/mx_venv/ilamb --file ilamb.yml --prune  # update env using ilamb yaml
+```
+
+
+- Serial run (Done) **ATTN**: still need to submit a single node job to run ILAMB as ILAMB includes MPI commands and cannot be run in the login nodes of NERSC, but you should run ILAMB in either parallel or serial in your local machine/laptop.
+
+- Parallel run (need to active mip4py)
+    1.  link the nersc mpi4py library
+    ```
+      > cd /global/common/software/m2467/mx_venv/ilamb/lib/python3.13/site-packages
+      > mv mpi4py mpi4py.bak
+      > ln -sf /global/common/software/nersc/pe/conda-envs/24.1.0/python-3.11/nersc-mpi4py/lib/python3.11/site-packages/mpi4py .        
+    ```
+
+    2. install mip4py manually using pip
+    
+    ```
+      > conda uninstall mpi4py
+      > pip install mpi4py  # make sure PrgEnv-gnu is loaded
+    ```
+ 
+    3. check mpi4py
+    
+    - create an interactive job
+        
+     ```
+        > salloc --nodes 1 --qos interactive --time 01:00:00 --constraint cpu --account m2467
+     ```
+     - write a test python code
+     ```
+       > cat test_mpi4py.py
+
+    #!/usr/bin/env python  
+  
+    from __future__ import print_function  
+    from mpi4py import MPI  
+  
+  
+    comm = MPI.COMM_WORLD  
+  
+    print("Hello! I'm rank %d from %d running in total..." % (comm.rank, comm.size))  
+  
+    comm.Barrier()   # wait for everybody to synchronize _here_
+     ```
+    - run it 
+     ```
+       > srun -n 4 python test_mpi4py.py
+    Hello! I'm rank 0 from 4 running in total...
+    Hello! I'm rank 1 from 4 running in total...
+    Hello! I'm rank 2 from 4 running in total...
+    Hello! I'm rank 3 from 4 running in total...
+
+     ```
+</div></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+## ILAMB installation (cont'd 2)
+
+- Install from pip or conda
+```
+  > pip install ilamb
+  > conda install -c conda-forge ilamb
+```
+- Manually installed from source code
+  - Install setuptools (no setuptools after Python 3.13, no need before it)
+  ```
+    > conda install setuptools
+  ```
+  - install ilamb
+  ```
+    > cd ILAMB
+    > python setup.py install
+  ```
+</div></script></section></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+## Install NCO and post-processing code
+
+- install nco
+
+ ```
+   > conda install -c conda-forge nco
+ ```
+
+- install post-processing code
+
+```
+  > git clone https://github.com/rubisco-sfa/elm2ilamb_wkflow.git
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+## Post-processing ELM raw output
+
+Functions:
+  - time serialization, converting multiple variables with single or multiple time steps in a file to multiple files with single variable with all time steps per file.
+  - spatial remapping if necessary. For example, from ne30 to 1 x 1 degree, or from 0.5x0.5 to 1 x 1 degree.
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+Running `./elm_singlevar_ts.bash`  needs to set some options. The options can shown when just execute it.
+```
+  > cd elm2ilamb_wkflow
+  > ./elm_singlevar_ts.bash
+Usage: elm_singlevar_ts.bash --caseid[-c] --year_range[-y] --align_year[-a] --caseidpath[-i] --outputpath[-o] 
+                  --experiment[-e] --model[-m] --ensemble --numcc [--cmip] [--ilamb] [--addfxflds] --srcgrid[-s] --dstgrid[-g] --hisfile -v --no-gents
+                  --skip-genmap --ncclimo|--pyreshaper --ncremap|--cremap3|--linkfil --prepcmor --hfs --oldname
+
+
+         --caseid, -c           : the case name
+         --year_range, -y       : the year range of the simulations that is used in the name construction of the output files.
+                                  Format: YYYY-YYYY, i.e. first year and last year. When it is combined with the --align_year, the model years
+                                  between first_year+align_year to last_year+align_year are processed
+         --year_align, -a       : the year used to align the model year and real years set in the --year_range, it equals
+                                  model year minus real year
+         --caseidpath, -i       : the directory of outputs from atm and lnd components, please provide two directory names seperated 
+                                  by comma if they are different
+         --outputpath, -o       : the directory for the outputs generated by this script
+         --experiment, -e       : the experiment name following CMIP conventions used in the name construction of the output files
+         --model, -m            : the model name, used in the name construnction of the output files and the subdirectory name under outputpath
+         --ensemble             : the ensemble number, for multi-instance it will 0001, 0002, 0003 etc.
+         --skip-genmap          : 0 means not to skip map generation, positive integer number is to skip it and use mapXXXX.nc instead
+         --srcgrid, -s          : if do remapping, source grid description in the SCRIP format is required
+         --dstgrid, -g          : if do remapping, target grid description in the SCRIP format is required
+         --histfile, -h         : history file number from model outputs (i.e. h0 or h1, h2 ..etc)
+         --numcc                : number of concurrent processes to do time serialzation. if 0 or not set use the total number of variables
+         --no-gen-ts            : switch of not generating time serialization (i.e. the ts files were generated before)
+         --ncclimo|pyreshaper   : switch of time serialization methods either using ncclimo or PyReshaper
+         --ncreamp|creamp3      : switch of remapping methods either using ncremap or conv_remap3, cannot be used together or with -linkfil
+         --linkfil              : switch to link the original to remapped files instead of actual remapping
+         --cmip                 : switch to rewrite model outputs following CMIP conventions
+         --skip_rename          : switch to skip renaming for cmip conversion (the renaming was done in a previous run)
+         --ilamb                : switch to rewrite the variables for analysis in ILAMB following CMIP conventions
+         --addfxflds            : switch to rewrite the two fixed datasets 'sftlf' and 'areacella' and exit. Default they won't be written out
+         --prepcmor             : switch to do time serializatons for preparing the data for cmorization
+         --tabname              : specify which tab to process (amon, lmon, or all when --hfs, amon mean aday omon mean oday)
+         --hfs                  : switch for high frequency data (daily, hourly)
+         --oldname              : switch to the old names in the histroy files, i.e. cam and clm2 instead of eam and elm
+
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+## Post-processing ELM raw output (cont'd)
+
+File:  process_e3sm_expai_ens.sh under example directory
+```bash
+#!/usr/bin/env bash
+
+
+export HDF5_USE_FILE_LOCKING=FALSE
+
+CaseNames=(\
+            2024-10-31.trans_EXPAI_RUBISCO_CMIP6_phase3_co2plus400.I20TRCNPRDCTCBC.hcru_hcru.pm-cpu.intel_001 )
+            #-2024-10-28.trans_EXPAI_RUBISCO_CMIP6_phase3.I20TRCNPRDCTCBC.hcru_hcru.pm-cpu.intel_001 \
+            #-2024-10-29.trans_EXPAI_RUBISCO_CMIP6_phase3_co2plus100.I20TRCNPRDCTCBC.hcru_hcru.pm-cpu.intel_001 \
+            #-2024-10-29.trans_EXPAI_RUBISCO_CMIP6_phase3_co2plus200.I20TRCNPRDCTCBC.hcru_hcru.pm-cpu.intel_001 \
+            #-2024-10-31.trans_EXPAI_RUBISCO_CMIP6_phase3_co2plus400.I20TRCNPRDCTCBC.hcru_hcru.pm-cpu.intel_001 )
+
+OutDir=/pscratch/sd/m/minxu/E3SM_simulations/
+CmrDir=/pscratch/sd/m/minxu/E3SM_postprocess/
+
+Script=`readlink -f $0`
+SrcDir=`dirname $Script`
+
+
+for ni in `seq 1 36`; do
+
+    cinst=`printf "%04d" $ni`
+
+    echo "processing $cinst"
+    for cname in "${CaseNames[@]}"; do
+        echo x${cname}x
+        echo $OutDir/$cname/run/
+        $SrcDir/../elm_singlevar_ts.bash -c $cname -y 1991-2014 -a 0 -i $OutDir/$cname/run/ -o $CmrDir \
+                   -e expai_001 -m e3sm --ncclimo --ensemble ${cinst} --tabname lmon
+    done
+
+
+done
+
+# get fix data
+$SirDir/../elm_singlevar_ts.bash -c $cname -y 1991-2014 -a 0 -i $OutDir/$cname/run/ -o $CmrDir \
+               -e expai_001 -m e3sm --ncclimo --ensemble ${cinst} --prepcmor --addfxflds --linkfil
+
+```
+
+- variables files: (could be created in the template directory if not exist)
+  - `Default -- Lmon_user.txt`
+  - `--ilamb -- Lmon_ilamb.txt`
+  - `--prepcmor -- Lmon_cmor.txt`
+  - `--tabname -- lmon: Lmon, amon: Amon, aday: Aday, lday: Lday`
+- timing: 32 variables, one case, it cost 16 mins
+- output: `/pscratch/sd/m/minxu/E3SM_postprocess/$casename/org/lnd`
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+## Fetch the benchmark data
+
+```
+
+  > mkdir ILAMB_data
+  > cd ILAMB_data
+  > ilamb-fetch
+  > ls
+  DATA
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+## Web interface for ILAMB results 
+
+- in your own machine
+```
+  > cd _build 
+  > python -m http.server
+```
+then open your browser, type address: 127.0.0.1:8000
+
+- on NERSC (science gateways for project)
+The m2467 science gateway is at https://portal.nersc.gov/cfs/m2467/, corresponding to the local directory on NERSC **/global/cfs/cdirs/m2467/www/**
+```
+  > cp -r _build /global/cfs/cdirs/m2467/www/minxu/
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+## Run ILAMB
+
+- Batch job
+- Interactive job
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+## Sample job script to run ILAMB on NERSC
+
+- run ILAMB over 36 instances (models)
+
+```
+# link benchmark data and model data
+ln -sf /global/cfs/csdir/e3sm/ILAMB_data/DATA .
+ln -sf /pscratch/sd/m/minxu/E3SM_postprocess/ MODEL
+
+# set envs
+export ILAMB_ROOT = /pscratch/sd/m/minxu/ILAMB_run
+export HDF5_USE_FILE_LOCKING = false
+
+
+cd $ILAMB_ROOT
+
+
+# a single node
+srun -n 12 ilamb-run --config ilamb_elm_cfg --model_root MODEL --regions global
+
+
+# copy to NERSC science gateways
+cp -r ./_build /global/cfs/cdirs/m2467/www/minxu/exp_ai/
+```
+
+- timing: 
+   - 36 instances, 1 node, 12 MPI ranks per node, 3 hours 12 mins.
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+## Sample job script to run ILAMB on NERSC (cont'd)
+
+- run ILAMB over 144 instances
+
+  - create a model list file (model_name, path)
+
+```  
+lnd_0001_amb,/pscratch/sd/m/minxu/E3SM_postprocess//2024-10-28.trans_EXPAI_RUBISCO_CMIP6_phase3.I20TRCNPRDCTCBC.hcru_hcru.pm-cpu.intel_001/org/lnd_0001  
+lnd_0001_100,/pscratch/sd/m/minxu/E3SM_postprocess//2024-10-29.trans_EXPAI_RUBISCO_CMIP6_phase3_co2plus100.I20TRCNPRDCTCBC.hcru_hcru.pm-cpu.intel_001/org/lnd_0001  
+lnd_0001_200,/pscratch/sd/m/minxu/E3SM_postprocess//2024-10-29.trans_EXPAI_RUBISCO_CMIP6_phase3_co2plus200.I20TRCNPRDCTCBC.hcru_hcru.pm-cpu.intel_001/org/lnd_0001  
+lnd_0001_400,/pscratch/sd/m/minxu/E3SM_postprocess//2024-10-31.trans_EXPAI_RUBISCO_CMIP6_phase3_co2plus400.I20TRCNPRDCTCBC.hcru_hcru.pm-cpu.intel_001/org/lnd_0001  
+lnd_0002_amb,/pscratch/sd/m/minxu/E3SM_postprocess//2024-10-28.trans_EXPAI_RUBISCO_CMIP6_phase3.I20TRCNPRDCTCBC.hcru_hcru.pm-cpu.intel_001/org/lnd_0002  
+lnd_0002_100,/pscratch/sd/m/minxu/E3SM_postprocess//2024-10-29.trans_EXPAI_RUBISCO_CMIP6_phase3_co2plus100.I20TRCNPRDCTCBC.hcru_hcru.pm-cpu.intel_001/org/lnd_0002  
+lnd_0002_200,/pscratch/sd/m/minxu/E3SM_postprocess//2024-10-29.trans_EXPAI_RUBISCO_CMIP6_phase3_co2plus200.I20TRCNPRDCTCBC.hcru_hcru.pm-cpu.intel_001/org/lnd_0002  
+lnd_0002_400,/pscratch/sd/m/minxu/E3SM_postprocess//2024-10-31.trans_EXPAI_RUBISCO_CMIP6_phase3_co2plus400.I20TRCNPRDCTCBC.hcru_hcru.pm-cpu.intel_001/org/lnd_0002  
+lnd_0003_amb,/pscratch/sd/m/minxu/E3SM_postprocess//2024-10-28.trans_EXPAI_RUBISCO_CMIP6_phase3.I20TRCNPRDCTCBC.hcru_hcru.pm-cpu.intel_001/org/lnd_0003
+```
+
+```
+# link benchmark data and model data
+ln -sf /global/cfs/csdir/e3sm/ILAMB_data/DATA .
+
+
+# set envs
+export ILAMB_ROOT = /pscratch/sd/m/minxu/ILAMB_run
+export HDF5_USE_FILE_LOCKING = false
+
+
+cd $ILAMB_ROOT
+
+
+# four nodes
+srun -n 48 ilamb-run --config ilamb_elm_cfg --model_setup model_list.txt --regions global 
+
+# copy to NERSC science gateways
+cp -r ./_build /global/cfs/cdirs/m2467/www/minxu/exp_ai/
+```
+
+- timing:
+   - 144 instances, 4 node, 12 MPI ranks per node, 3 hours 35 mins. (20 MPI ranks per node, failed with an OOM error during the generations of figures and tables)
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+## Check the web interface
+
+- open your browser and type address:
+
+  - The all 144 scenarios result:
+     - [landing page](https://portal.nersc.gov/cfs/m2467/minxu/expai_144/index.html)
+      - [unified dashboard](https://portal.nersc.gov/cfs/m2467/minxu/expai_144/dashboard.html)
+  - The plus 100 CO2 36 instances result:
+    - [landing page](https://portal.nersc.gov/cfs/m2467/minxu/expai_co2_100/)
+    - [unified dashboard](https://portal.nersc.gov/cfs/m2467/minxu/expai_co2_100/dashboard.html)
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+## Normal problems
+
+- forget to set `ILAMB_ROOT` and `HDF5_USE_FILE_LOCKING`
+- incorrectly set the options in the configuration files 
+- forget to delete all pkl files under \_build after updating model results
+- forget to set the year alignment when the model year range does not cover the periods from 1980-2015 in which most benchmark data are
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+## References
+
+- ILAMB website: https://ilamb.org
+- ILAMB GitHub: https://github.com/rubisco-sfa/ILAMB
+- Unified Dashboard: https://github.com/climatemodeling/unified-dashboard
+- ELM post-processing: https://github.com/rubisco-sfa/elm2ilamb_wkflow
+- ILAMB-workflow: https://ilamb-workflow.readthedocs.io/en/latest/?badge=latest
+</div></script></section></div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+
+    <script src="plugin/zoom/zoom.js"></script>
+    <script src="plugin/math/math.js"></script>
+    <script src="plugin/mermaid/mermaid.js"></script>
+    <script src="plugin/chart/chart.min.js"></script>
+    <script src="plugin/chart/plugin.js"></script>
+    <script src="plugin/menu/menu.js"></script>
+    <script src="plugin/customcontrols/plugin.js"></script>
+
+    <script>
+        function extend() {
+            const target = {};
+            for (let i = 0; i < arguments.length; i++) {
+                const source = arguments[i];
+                for (const key in source) {
+                    if (source.hasOwnProperty(key)) {
+                        target[key] = source[key];
+                    }
+                }
+            }
+            return target;
+        }
+
+        function isLight(color) {
+            let hex = color.replace('#', '');
+
+            // convert #fff => #ffffff
+            if (hex.length == 3) {
+                hex = `${hex[0]}${hex[0]}${hex[1]}${hex[1]}${hex[2]}${hex[2]}`;
+            }
+
+            const c_r = parseInt(hex.substr(0, 2), 16);
+            const c_g = parseInt(hex.substr(2, 2), 16);
+            const c_b = parseInt(hex.substr(4, 2), 16);
+            const brightness = ((c_r * 299) + (c_g * 587) + (c_b * 114)) / 1000;
+            return brightness > 155;
+        }
+
+        const bgColor = getComputedStyle(document.documentElement).getPropertyValue('--r-background-color').trim();
+
+        if (isLight(bgColor)) {
+            document.body.classList.add('has-light-background');
+        } else {
+            document.body.classList.add('has-dark-background');
+        }
+
+        // default options to init reveal.js
+        const defaultOptions = {
+            controls: true,
+            progress: true,
+            history: true,
+            center: true,
+            transition: 'default', // none/fade/slide/convex/concave/zoom
+            plugins: [
+                RevealMarkdown,
+                RevealHighlight,
+                RevealZoom,
+                RevealNotes,
+                RevealMath.MathJax3,
+                RevealMermaid,
+                RevealChart,
+                RevealCustomControls,
+                RevealMenu,
+            ],
+            allottedTime: 120 * 1000,
+            mathjax3: {
+                mathjax: 'plugin/math/mathjax/tex-mml-chtml.js',
+            },
+            markdown: {
+                gfm: true,
+                mangle: true,
+                pedantic: false,
+                smartLists: false,
+                smartypants: false,
+            },
+            mermaid: {
+                theme: isLight ? 'default' : 'dark',
+            },
+            customcontrols: {
+                controls: [
+                ]
+            },
+            menu: {
+                loadIcons: false
+            }
+        };
+
+        if ( pageInIframe() ) {
+            defaultOptions.scrollActivationWidth = 5;
+        }
+
+        // options from URL query string
+        const queryOptions = Reveal().getQueryHash() || {};
+
+        const options = extend(defaultOptions, {"controls":true,"progress":true,"slideNumber":true,"center":false,"transition":"slide","transitionSpeed":"default","width":960,"height":700,"margin":0.04}, queryOptions);
+    </script>
+
+    <script>
+      Reveal.initialize(options);
+    </script>
+</body>
+
+<!-- created with Slides Extended -->
+</html>
