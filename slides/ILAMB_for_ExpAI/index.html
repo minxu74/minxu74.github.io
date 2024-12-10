@@ -160,9 +160,12 @@ Currently Loaded Modules Matching: PrgEnv
   > conda activate /global/common/software/m2467/mx_venv/ilamb
   > conda env update -p /global/common/software/m2467/mx_venv/ilamb --file ilamb.yml --prune  # update env using ilamb yaml
 ```
+</div></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
 
-
+##  ILAMB Installation (cont'd 2)
 - Serial run (Done) **ATTN**: still need to submit a single node job to run ILAMB as ILAMB includes MPI commands and cannot be run in the login nodes of NERSC, but you should run ILAMB in either parallel or serial in your local machine/laptop.
+
 
 - Parallel run (need to active mip4py)
     1.  link the nersc mpi4py library
@@ -178,8 +181,12 @@ Currently Loaded Modules Matching: PrgEnv
       > conda uninstall mpi4py
       > pip install mpi4py  # make sure PrgEnv-gnu is loaded
     ```
- 
-    3. check mpi4py
+</div></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+##  ILAMB Installation (cont'd 3)
+
+- check mpi4py
     
     - create an interactive job
         
@@ -214,7 +221,7 @@ Currently Loaded Modules Matching: PrgEnv
 </div></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
 
-## ILAMB installation (cont'd 2)
+## ILAMB installation (cont'd 4)
 
 - Install from pip or conda
 ```
@@ -246,6 +253,16 @@ Currently Loaded Modules Matching: PrgEnv
 
 ```
   > git clone https://github.com/rubisco-sfa/elm2ilamb_wkflow.git
+  > cd elm2ilamb_wkflow
+  > ls -l
+  
+-rwxr-x--- 1 minxu minxu  9407 May 23  2023 conv_remap3.sh  
+-rwxrwx--- 1 minxu minxu 28779 Oct 28 16:19 elm_singlevar_ts.bash  
+drwxr-x--- 2 minxu minxu  4096 Dec  9 12:00 example  
+drwxr-x--- 2 minxu minxu  4096 Oct 28 15:58 grids  
+-rw-r----- 1 minxu minxu  5654 Jul 28  2020 README.md  
+drwxrwx--- 2 minxu minxu  4096 Dec  9 11:42 template  
+drwxr-x--- 2 minxu minxu  4096 Dec  9 07:34 tool
 ```
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
@@ -306,28 +323,22 @@ Usage: elm_singlevar_ts.bash --caseid[-c] --year_range[-y] --align_year[-a] --ca
 File:  process_e3sm_expai_ens.sh under example directory
 ```bash
 #!/usr/bin/env bash
-
-
 export HDF5_USE_FILE_LOCKING=FALSE
 
 CaseNames=(\
             2024-10-31.trans_EXPAI_RUBISCO_CMIP6_phase3_co2plus400.I20TRCNPRDCTCBC.hcru_hcru.pm-cpu.intel_001 )
-            #-2024-10-28.trans_EXPAI_RUBISCO_CMIP6_phase3.I20TRCNPRDCTCBC.hcru_hcru.pm-cpu.intel_001 \
-            #-2024-10-29.trans_EXPAI_RUBISCO_CMIP6_phase3_co2plus100.I20TRCNPRDCTCBC.hcru_hcru.pm-cpu.intel_001 \
-            #-2024-10-29.trans_EXPAI_RUBISCO_CMIP6_phase3_co2plus200.I20TRCNPRDCTCBC.hcru_hcru.pm-cpu.intel_001 \
-            #-2024-10-31.trans_EXPAI_RUBISCO_CMIP6_phase3_co2plus400.I20TRCNPRDCTCBC.hcru_hcru.pm-cpu.intel_001 )
+            2024-10-28.trans_EXPAI_RUBISCO_CMIP6_phase3.I20TRCNPRDCTCBC.hcru_hcru.pm-cpu.intel_001 \
+            2024-10-29.trans_EXPAI_RUBISCO_CMIP6_phase3_co2plus100.I20TRCNPRDCTCBC.hcru_hcru.pm-cpu.intel_001 \
+            2024-10-29.trans_EXPAI_RUBISCO_CMIP6_phase3_co2plus200.I20TRCNPRDCTCBC.hcru_hcru.pm-cpu.intel_001 \
+            2024-10-31.trans_EXPAI_RUBISCO_CMIP6_phase3_co2plus400.I20TRCNPRDCTCBC.hcru_hcru.pm-cpu.intel_001 )
 
 OutDir=/pscratch/sd/m/minxu/E3SM_simulations/
 CmrDir=/pscratch/sd/m/minxu/E3SM_postprocess/
 
 Script=`readlink -f $0`
 SrcDir=`dirname $Script`
-
-
 for ni in `seq 1 36`; do
-
     cinst=`printf "%04d" $ni`
-
     echo "processing $cinst"
     for cname in "${CaseNames[@]}"; do
         echo x${cname}x
@@ -335,8 +346,6 @@ for ni in `seq 1 36`; do
         $SrcDir/../elm_singlevar_ts.bash -c $cname -y 1991-2014 -a 0 -i $OutDir/$cname/run/ -o $CmrDir \
                    -e expai_001 -m e3sm --ncclimo --ensemble ${cinst} --tabname lmon
     done
-
-
 done
 
 # get fix data
@@ -358,12 +367,13 @@ $SirDir/../elm_singlevar_ts.bash -c $cname -y 1991-2014 -a 0 -i $OutDir/$cname/r
 ## Fetch the benchmark data
 
 ```
-
   > mkdir ILAMB_data
   > cd ILAMB_data
   > ilamb-fetch
+  > cd DATA
   > ls
-  DATA
+active_layer_thickness  biomass    ch4  cSoil  evspsbl  gpp    hfls  lai   mrsos  nee         pr    regions  rlds  rlus  rsds  rsus  tas     tasmin     twsa  
+albedo                  burntArea  co2  dtr    fBNF     hfdsl  hfss  mrro  nbp    permafrost  reco  rhums    rlns  rns   rsns  swe   tasmax  time_bnds
 ```
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
@@ -419,16 +429,39 @@ cp -r ./_build /global/cfs/cdirs/m2467/www/minxu/exp_ai/
 
 - timing: 
    - 36 instances, 1 node, 12 MPI ranks per node, 3 hours 12 mins.
-</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+</div></script></section><section ><section data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
 
-## Sample job script to run ILAMB on NERSC (cont'd)
+## Sample job script to run ILAMB on NERSC (cont'd 1)
 
 - run ILAMB over 144 instances
 
   - create a model list file (model_name, path)
-
 ```  
+#!/usr/bin/env bash      
+export HDF5_USE_FILE_LOCKING=FALSE   
+CaseNames=(\  
+           2024-10-28.trans_EXPAI_RUBISCO_CMIP6_phase3.I20TRCNPRDCTCBC.hcru_hcru.pm-cpu.intel_001 \  
+           2024-10-29.trans_EXPAI_RUBISCO_CMIP6_phase3_co2plus100.I20TRCNPRDCTCBC.hcru_hcru.pm-cpu.intel_001 \  
+           2024-10-29.trans_EXPAI_RUBISCO_CMIP6_phase3_co2plus200.I20TRCNPRDCTCBC.hcru_hcru.pm-cpu.intel_001 \  
+           2024-10-31.trans_EXPAI_RUBISCO_CMIP6_phase3_co2plus400.I20TRCNPRDCTCBC.hcru_hcru.pm-cpu.intel_001 )  
+  
+shortcase=('amb' '100' '200' '400')   
+CmrDir=/pscratch/sd/m/minxu/E3SM_postprocess/ 
+for ni in `seq 1 36`; do  
+    cinst=`printf "%04d" $ni`  
+    k=0  
+    for cname in "${CaseNames[@]}"; do  
+       item=${CmrDir}/$cname/org/lnd_$cinst  
+       modelname=`basename $item`  
+       echo ${modelname}_${shortcase[$k]},$item  
+       k=$(( k+1 ))  
+    done  
+done
+```
+ File `model_list.txt`
+  
+```
 lnd_0001_amb,/pscratch/sd/m/minxu/E3SM_postprocess//2024-10-28.trans_EXPAI_RUBISCO_CMIP6_phase3.I20TRCNPRDCTCBC.hcru_hcru.pm-cpu.intel_001/org/lnd_0001  
 lnd_0001_100,/pscratch/sd/m/minxu/E3SM_postprocess//2024-10-29.trans_EXPAI_RUBISCO_CMIP6_phase3_co2plus100.I20TRCNPRDCTCBC.hcru_hcru.pm-cpu.intel_001/org/lnd_0001  
 lnd_0001_200,/pscratch/sd/m/minxu/E3SM_postprocess//2024-10-29.trans_EXPAI_RUBISCO_CMIP6_phase3_co2plus200.I20TRCNPRDCTCBC.hcru_hcru.pm-cpu.intel_001/org/lnd_0001  
@@ -438,31 +471,35 @@ lnd_0002_100,/pscratch/sd/m/minxu/E3SM_postprocess//2024-10-29.trans_EXPAI_RUBIS
 lnd_0002_200,/pscratch/sd/m/minxu/E3SM_postprocess//2024-10-29.trans_EXPAI_RUBISCO_CMIP6_phase3_co2plus200.I20TRCNPRDCTCBC.hcru_hcru.pm-cpu.intel_001/org/lnd_0002  
 lnd_0002_400,/pscratch/sd/m/minxu/E3SM_postprocess//2024-10-31.trans_EXPAI_RUBISCO_CMIP6_phase3_co2plus400.I20TRCNPRDCTCBC.hcru_hcru.pm-cpu.intel_001/org/lnd_0002  
 lnd_0003_amb,/pscratch/sd/m/minxu/E3SM_postprocess//2024-10-28.trans_EXPAI_RUBISCO_CMIP6_phase3.I20TRCNPRDCTCBC.hcru_hcru.pm-cpu.intel_001/org/lnd_0003
+
+   ```
+</div></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+## Sample job script to run ILAMB on NERSC (cont'd 2)
+
+- allocate 4 nodes
+```
+  > salloc --nodes 4 --qos interactive --time 01:00:00 --constraint cpu --account m2467
 ```
 
+- run the following commands in the compute node
 ```
 # link benchmark data and model data
 ln -sf /global/cfs/csdir/e3sm/ILAMB_data/DATA .
-
-
 # set envs
 export ILAMB_ROOT = /pscratch/sd/m/minxu/ILAMB_run
 export HDF5_USE_FILE_LOCKING = false
-
-
 cd $ILAMB_ROOT
-
-
 # four nodes
 srun -n 48 ilamb-run --config ilamb_elm_cfg --model_setup model_list.txt --regions global 
-
 # copy to NERSC science gateways
 cp -r ./_build /global/cfs/cdirs/m2467/www/minxu/exp_ai/
 ```
 
 - timing:
    - 144 instances, 4 node, 12 MPI ranks per node, 3 hours 35 mins. (20 MPI ranks per node, failed with an OOM error during the generations of figures and tables)
-</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+</div></script></section></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
 
 ## Check the web interface
